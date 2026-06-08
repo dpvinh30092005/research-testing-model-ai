@@ -1,0 +1,60 @@
+# Bugget Planner
+
+Overview:
+The command "planner" provides functionality to create, manage, and visualize your budget. You can input your income and expenditures, and the application will show you a summary of your current budget status.
+
+Commands:
+
+- `planner add-income <amount> "<source>"`: Add an income source and its amount ($). For example: `planner add-income 5000 "salary"`.
+- `planner add-expense <amount> "<source>"`: Add an expense source and its amount ($). For example: `planner add-expense 50 "food"`.
+- `planner remove-income "<source>"`: Remove an income source. For example: `planner remove-income "salary"`.
+- `planner remove-expense "<source>"`: Remove an expense source. For example: `planner remove-expense "food"`.
+- `planner list-incomes`: List all the income sources, their amounts, and the total amount.
+- `planner list-expenses`: List all the expense sources, their amounts, and the total amount.
+- `planner show-budget`: Shows the total income, total expenditure, and the balance amount.
+
+`source` must be a string of 50 characters or less.
+Only one `source` with the same name can exist.
+`amount` should be given as a positive integer up to 100,000.
+Up to 100 income and expenses can be registered for each.
+
+Usage Example:
+
+```
+$ planner add-income 3000 "salary"
+Income added: $3000 from source "salary".
+
+$ planner list-incomes
+1. salary: $3000
+Total Income: $3000
+
+$ planner add-income 1000 "bonus"
+Income added: $1000 from source "bonus".
+
+$ planner add-expense 1500 "rent"
+Expense added: $1500 for source "rent".
+
+$ planner add-expense 2000 "shopping"
+Expense added: $2000 for source "shopping".
+
+$ planner list-expenses
+1. rent: $1500
+2. shopping: $2000
+Total Expense: $3500
+
+$ planner show-budget
+Total Income: $4000
+Total Expense: $3500
+Balance: $500
+
+$ planner remove-expense "shopping"
+Expense removed: "shopping".
+
+$ planner remove-income "salary"
+Income removed: "salary".
+
+$ planner show-budget
+Total Income: $1000
+Total Expense: $1500
+Balance: $-500
+```

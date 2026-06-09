@@ -1,0 +1,399 @@
+# Test case 1
+
+Meter to Mile Conversion: This test case verify valid conversion from meter to mile
+Test Steps:
+
+- `unitconv --from meter --to mile --value 1000`
+- Verify that the output is `Result: 0.62 mile`.
+
+# Test case 2
+
+Meter to Yard Conversion: This test case verify valid conversion from meter to yard
+Test Steps:
+
+- `unitconv --from meter --to yard --value 10`
+- Verify that the output is `Result: 10.94 yard`.
+
+# Test case 3
+
+Meter to Foot Conversion: This test case verify valid conversion from meter to foot
+Test Steps:
+
+- `unitconv --from meter --to foot --value 10`
+- Verify that the output is `Result: 32.81 foot`.
+
+# Test case 4
+
+Mile to Meter Conversion: This test case verify valid conversion from mile to meter
+Test Steps:
+
+- `unitconv --from mile --to meter --value 1`
+- Verify that the output is `Result: 1609.34 meter`.
+
+# Test case 5
+
+Mile to Yard Conversion: This test case verify valid conversion from mile to yard
+Test Steps:
+
+- `unitconv --from mile --to yard --value 1`
+- Verify that the output is `Result: 1760.00 yard`.
+
+# Test case 6
+
+Mile to Foot Conversion: This test case verify valid conversion from mile to foot
+Test Steps:
+
+- `unitconv --from mile --to foot --value 0.5`
+- Verify that the output is `Result: 2640.00 foot`.
+
+# Test case 7
+
+Yard to Meter Conversion: This test case verify valid conversion from yard to meter
+Test Steps:
+
+- `unitconv --from yard --to meter --value 10`
+- Verify that the output is `Result: 9.14 meter`.
+
+# Test case 8
+
+Yard to Mile Conversion: This test case verify valid conversion from yard to mile
+Test Steps:
+
+- `unitconv --from yard --to mile --value 1000`
+- Verify that the output is `Result: 0.57 mile`.
+
+# Test case 9
+
+Yard to Foot Conversion: This test case verify valid conversion from yard to foot
+Test Steps:
+
+- `unitconv --from yard --to foot --value 10`
+- Verify that the output is `Result: 30.00 foot`.
+
+# Test case 10
+
+Foot to Meter Conversion: This test case verify valid conversion from foot to meter
+Test Steps:
+
+- `unitconv --from foot --to meter --value 10`
+- Verify that the output is `Result: 3.05 meter`.
+
+# Test case 11
+
+Foot to Mile Conversion: This test case verify valid conversion from foot to mile
+Test Steps:
+
+- `unitconv --from foot --to mile --value 1000`
+- Verify that the output is `Result: 0.19 mile`.
+
+# Test case 12
+
+Foot to Yard Conversion: This test case verify valid conversion from foot to yard
+Test Steps:
+
+- `unitconv --from foot --to yard --value 10`
+- Verify that the output is `Result: 3.33 yard`.
+
+# Test case 13
+
+Celsius to Fahrenheit Conversion: This test case verify valid conversion from celsius to fahrenheit
+Test Steps:
+
+- `unitconv --from celsius --to fahrenheit --value 100`
+- Verify that the output is `Result: 212.00 fahrenheit`.
+
+# Test case 14
+
+Celsius to Kelvin Conversion: This test case verify valid conversion from celsius to kelvin
+Test Steps:
+
+- `unitconv --from celsius --to kelvin --value 0`
+- Verify that the output is `Result: 273.15 kelvin`.
+
+# Test case 15
+
+Fahrenheit to Celsius Conversion: This test case verify valid conversion from fahrenheit to celsius
+Test Steps:
+
+- `unitconv --from fahrenheit --to celsius --value 32`
+- Verify that the output is `Result: 0.00 celsius`.
+
+# Test case 16
+
+Fahrenheit to Kelvin Conversion: This test case verify valid conversion from fahrenheit to kelvin
+Test Steps:
+
+- `unitconv --from fahrenheit --to kelvin --value 212`
+- Verify that the output is `Result: 373.15 kelvin`.
+
+# Test case 17
+
+Kelvin to Celsius Conversion: This test case verify valid conversion from kelvin to celsius
+Test Steps:
+
+- `unitconv --from kelvin --to celsius --value 300`
+- Verify that the output is `Result: 26.85 celsius`.
+
+# Test case 18
+
+Kelvin to Fahrenheit Conversion: This test case verify valid conversion from kelvin to fahrenheit
+Test Steps:
+
+- `unitconv --from kelvin --to fahrenheit --value 300`
+- Verify that the output is `Result: 80.33 fahrenheit`.
+
+# Test case 19
+
+Max Valid Value: This test case verify the boundary maximum value exactly 1000.00
+Test Steps:
+
+- `unitconv --from meter --to foot --value 1000.00`
+- Verify that the output is `Result: 3280.84 foot`.
+
+# Test case 20
+
+Exceed Max Value: This test case verify error handling when value is slightly above the maximum limit
+Test Steps:
+
+- `unitconv --from meter --to foot --value 1000.01`
+- Verify that the output is `Error: Value to convert must be less than or equal to 1000.00.`.
+
+# Test case 21
+
+Significantly Exceed Max Value: This test case verify error handling when value is well above the maximum limit
+Test Steps:
+
+- `unitconv --from celsius --to fahrenheit --value 5000`
+- Verify that the output is `Error: Value to convert must be less than or equal to 1000.00.`.
+
+# Test case 22
+
+Valid Decimal Format (One Decimal): This test case verify successful parsing of a single decimal place value
+Test Steps:
+
+- `unitconv --from yard --to meter --value 5.5`
+- Verify that the output is `Result: 5.03 meter`.
+
+# Test case 23
+
+Valid Decimal Format (Two Decimals): This test case verify successful parsing of a two decimal place value
+Test Steps:
+
+- `unitconv --from foot --to yard --value 10.55`
+- Verify that the output is `Result: 3.52 yard`.
+
+# Test case 24
+
+Invalid Decimal Format: This test case verify error handling when value has more than two decimal places
+Test Steps:
+
+- `unitconv --from meter --to foot --value 10.123`
+- Verify that the output is `Error: Value must be an integer or real number up to two decimal places.`.
+
+# Test case 25
+
+Invalid Zero Length: This test case verify error handling when length value is zero
+Test Steps:
+
+- `unitconv --from meter --to yard --value 0`
+- Verify that the output is `Error: Value must be positive when converting length.`.
+
+# Test case 26
+
+Invalid Negative Length: This test case verify error handling when length value is negative
+Test Steps:
+
+- `unitconv --from foot --to mile --value -10.50`
+- Verify that the output is `Error: Value must be positive when converting length.`.
+
+# Test case 27
+
+Valid Minimum Length: This test case verify boundary positive value slightly above zero for length
+Test Steps:
+
+- `unitconv --from yard --to foot --value 0.01`
+- Verify that the output is `Result: 0.03 foot`.
+
+# Test case 28
+
+Invalid Zero Kelvin Source: This test case verify error handling when source unit is kelvin and value is zero
+Test Steps:
+
+- `unitconv --from kelvin --to celsius --value 0`
+- Verify that the output is `Error: Value must be positive when source unit is kelvin.`.
+
+# Test case 29
+
+Invalid Negative Kelvin Source: This test case verify error handling when source unit is kelvin and value is negative
+Test Steps:
+
+- `unitconv --from kelvin --to fahrenheit --value -100`
+- Verify that the output is `Error: Value must be positive when source unit is kelvin.`.
+
+# Test case 30
+
+Valid Minimum Kelvin Source: This test case verify boundary positive value slightly above zero for kelvin
+Test Steps:
+
+- `unitconv --from kelvin --to celsius --value 0.01`
+- Verify that the output is `Result: -273.14 celsius`.
+
+# Test case 31
+
+Valid Zero Celsius: This test case verify zero is a valid value for celsius
+Test Steps:
+
+- `unitconv --from celsius --to fahrenheit --value 0`
+- Verify that the output is `Result: 32.00 fahrenheit`.
+
+# Test case 32
+
+Valid Negative Celsius: This test case verify negative value is valid for celsius
+Test Steps:
+
+- `unitconv --from celsius --to fahrenheit --value -40`
+- Verify that the output is `Result: -40.00 fahrenheit`.
+
+# Test case 33
+
+Valid Zero Fahrenheit: This test case verify zero is a valid value for fahrenheit
+Test Steps:
+
+- `unitconv --from fahrenheit --to celsius --value 0`
+- Verify that the output is `Result: -17.78 celsius`.
+
+# Test case 34
+
+Valid Negative Fahrenheit: This test case verify negative value is valid for fahrenheit
+Test Steps:
+
+- `unitconv --from fahrenheit --to celsius --value -40`
+- Verify that the output is `Result: -40.00 celsius`.
+
+# Test case 35
+
+Identical Source and Target: This test case verify error handling when source and target units are the same
+Test Steps:
+
+- `unitconv --from meter --to meter --value 10`
+- Verify that the output is `Error: Source and target units must be different.`.
+
+# Test case 36
+
+Cross Category Conversion (Length to Temp): This test case verify error handling when units belong to different categories
+Test Steps:
+
+- `unitconv --from meter --to celsius --value 10`
+- Verify that the output is `Error: Source and target units must belong to the same category.`.
+
+# Test case 37
+
+Cross Category Conversion (Temp to Length): This test case verify error handling when units belong to different categories
+Test Steps:
+
+- `unitconv --from fahrenheit --to yard --value 50`
+- Verify that the output is `Error: Source and target units must belong to the same category.`.
+
+# Test case 38
+
+Invalid Source Unit: This test case verify error handling for unrecognized source unit
+Test Steps:
+
+- `unitconv --from inch --to meter --value 10`
+- Verify that the output is `Error: Invalid source unit 'inch'. Accepted units are meter, mile, yard, foot, celsius, fahrenheit, kelvin.`.
+
+# Test case 39
+
+Invalid Target Unit: This test case verify error handling for unrecognized target unit
+Test Steps:
+
+- `unitconv --from celsius --to rankine --value 100`
+- Verify that the output is `Error: Invalid target unit 'rankine'. Accepted units are meter, mile, yard, foot, celsius, fahrenheit, kelvin.`.
+
+# Test case 40
+
+Invalid Both Units: This test case verify error handling when both units are entirely unrecognized
+Test Steps:
+
+- `unitconv --from gram --to liter --value 10`
+- Verify that the output is `Error: Invalid source unit 'gram'. Accepted units are meter, mile, yard, foot, celsius, fahrenheit, kelvin.`.
+
+# Test case 41
+
+Empty Source Unit: This test case verify error handling when source unit flag is empty
+Test Steps:
+
+- `unitconv --from "" --to meter --value 10`
+- Verify that the output is `Error: Missing or empty source unit.`.
+
+# Test case 42
+
+Empty Target Unit: This test case verify error handling when target unit flag is empty
+Test Steps:
+
+- `unitconv --from meter --to "" --value 10`
+- Verify that the output is `Error: Missing or empty target unit.`.
+
+# Test case 43
+
+Missing From Option: This test case verify error handling when the --from option is completely omitted
+Test Steps:
+
+- `unitconv --to foot --value 10`
+- Verify that the output is `Error: Missing required option '--from'.`.
+
+# Test case 44
+
+Missing To Option: This test case verify error handling when the --to option is completely omitted
+Test Steps:
+
+- `unitconv --from meter --value 10`
+- Verify that the output is `Error: Missing required option '--to'.`.
+
+# Test case 45
+
+Missing Value Option: This test case verify error handling when the --value option is completely omitted
+Test Steps:
+
+- `unitconv --from meter --to foot`
+- Verify that the output is `Error: Missing required option '--value'.`.
+
+# Test case 46
+
+Non-Numeric Value String: This test case verify error handling when value is not a valid number
+Test Steps:
+
+- `unitconv --from meter --to foot --value ten`
+- Verify that the output is `Error: Value must be a valid integer or real number.`.
+
+# Test case 47
+
+Empty Value String: This test case verify error handling when value argument is provided but empty
+Test Steps:
+
+- `unitconv --from meter --to foot --value ""`
+- Verify that the output is `Error: Value must be a valid integer or real number.`.
+
+# Test case 48
+
+No Options Provided: This test case verify error handling when no command line arguments are provided
+Test Steps:
+
+- `unitconv`
+- Verify that the output is `Error: Missing required options. Usage: unitconv --from <source_unit> --to <target_unit> --value <value_to_convert>`.
+
+# Test case 49
+
+Output Rounding (Round Down): This test case verify that the third decimal correctly rounds down for output formatting
+Test Steps:
+
+- `unitconv --from foot --to meter --value 1.55`
+- Verify that the output is `Result: 0.47 meter`.
+
+# Test case 50
+
+Max Fahrenheit Input: This test case verify handling of the max allowable input boundary for Fahrenheit
+Test Steps:
+
+- `unitconv --from fahrenheit --to celsius --value 1000.00`
+- Verify that the output is `Result: 537.78 celsius`.

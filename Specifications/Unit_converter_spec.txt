@@ -1,35 +1,35 @@
-## Unit Convert
+    ## Unit Convert
 
-Overview:
-`unitconv` converts between different units of the same category. It supports the categories length and temperature.
+    Overview:
+    `unitconv` converts between different units of the same category. It supports the categories length and temperature.
 
-Command:
-`unitconv --from <source_unit> --to <target_unit> --value <value_to_convert>`
+    Command:
+    `unitconv --from <source_unit> --to <target_unit> --value <value_to_convert>`
 
-Here's what each option means:
+    Here's what each option means:
 
-- `--from` : Source unit you are converting from
-- `--to` : Target unit you want to convert to
-- `--value` : The numeric value you wish to convert
+    - `--from` : Source unit you are converting from
+    - `--to` : Target unit you want to convert to
+    - `--value` : The numeric value you wish to convert
 
-The list of accepted `source_units` and `target_units` can be divided into several categories, each containing a set of units.
+    The list of accepted `source_units` and `target_units` can be divided into several categories, each containing a set of units.
 
-1. Length: meter, mile, yard, foot
-2. Temperature: celsius, fahrenheit, kelvin
+    1. Length: meter, mile, yard, foot
+    2. Temperature: celsius, fahrenheit, kelvin
 
-`source_units` and `target_units` must be different.
-`value_to_convert` must be an integer or real number up to two decimal places less or equal to 1000.00.
-If its category is length or `source_units` is kelvin, `value_to_convert` must be positive.
-The converted value must be rounded to the third decimal place and output to the second decimal place.
+    `source_units` and `target_units` must be different.
+    `value_to_convert` must be an integer or real number up to two decimal places less or equal to 1000.00.
+    If its category is length or `source_units` is kelvin, `value_to_convert` must be positive.
+    The converted value must be rounded to the third decimal place and output to the second decimal place.
 
-Usage Example:
+    Usage Example:
 
-```
-# Convert 10 meters to feet
-$ unitconv --from meter --to foot --value 10
-Result: 32.81 feet
+    ```
+    # Convert 10 meters to feet
+    $ unitconv --from meter --to foot --value 10
+    Result: 32.81 feet
 
-# Convert 100 Celsius to Fahrenheit
-$ unitconv --from celsius --to fahrenheit --value 100
-Result: 212.00 Fahrenheit
-```
+    # Convert 100 Celsius to Fahrenheit
+    $ unitconv --from celsius --to fahrenheit --value 100
+    Result: 212.00 Fahrenheit
+    ```

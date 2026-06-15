@@ -1,319 +1,431 @@
 # Test case 1
 
-Successful Add-Income: This test case verifies that a valid income can be successfully added.
-Input: `planner add-income 5000 "salary"`
-Expected result: `Income added: $5000 from source "salary".`
+Add income minimum boundary: This test case verify adding an income with the minimum allowed amount.
+Test Steps:
+
+- `planner add-income 1 "freelance"`
+- Verify that the output is `Income added: $1 from source "freelance".`
 
 # Test case 2
 
-Successful Add-Expense: This test case verifies that a valid expense can be successfully added.
-Input: `planner add-expense 50 "food"`
-Expected result: `Expense added: $50 for source "food".`
+Add expense minimum boundary: This test case verify adding an expense with the minimum allowed amount.
+Test Steps:
+
+- `planner add-expense 1 "candy"`
+- Verify that the output is `Expense added: $1 for source "candy".`
 
 # Test case 3
 
-Add-Income Minimum Value: This test case verifies that an income with the minimum valid amount (1) can be added.
-Input: `planner add-income 1 "penny"`
-Expected result: `Income added: $1 from source "penny".`
+Add income maximum boundary: This test case verify adding an income with the maximum allowed amount.
+Test Steps:
+
+- `planner add-income 100000 "lottery"`
+- Verify that the output is `Income added: $100000 from source "lottery".`
 
 # Test case 4
 
-Add-Expense Minimum Value: This test case verifies that an expense with the minimum valid amount (1) can be added.
-Input: `planner add-expense 1 "candy"`
-Expected result: `Expense added: $1 for source "candy".`
+Add expense maximum boundary: This test case verify adding an expense with the maximum allowed amount.
+Test Steps:
+
+- `planner add-expense 100000 "house"`
+- Verify that the output is `Expense added: $100000 for source "house".`
 
 # Test case 5
 
-Add-Income Maximum Value: This test case verifies that an income with the maximum valid amount (100000) can be added.
-Input: `planner add-income 100000 "lottery"`
-Expected result: `Income added: $100000 from source "lottery".`
+Add income mid-range valid: This test case verify adding a standard mid-range income.
+Test Steps:
+
+- `planner add-income 5000 "salary"`
+- Verify that the output is `Income added: $5000 from source "salary".`
 
 # Test case 6
 
-Add-Expense Maximum Value: This test case verifies that an expense with the maximum valid amount (100000) can be added.
-Input: `planner add-expense 100000 "car"`
-Expected result: `Expense added: $100000 for source "car".`
+Add expense mid-range valid: This test case verify adding a standard mid-range expense.
+Test Steps:
+
+- `planner add-expense 150 "groceries"`
+- Verify that the output is `Expense added: $150 for source "groceries".`
 
 # Test case 7
 
-Add-Income Error Zero Amount: This test case verifies that an income of 0 returns an error since it must be a positive integer.
-Input: `planner add-income 0 "gift"`
-Expected result: `Error: Amount must be a positive integer up to 100,000.`
+Add income 1-character source: This test case verify adding an income with the shortest possible source name.
+Test Steps:
+
+- `planner add-income 100 "A"`
+- Verify that the output is `Income added: $100 from source "A".`
 
 # Test case 8
 
-Add-Expense Error Zero Amount: This test case verifies that an expense of 0 returns an error since it must be a positive integer.
-Input: `planner add-expense 0 "freebie"`
-Expected result: `Error: Amount must be a positive integer up to 100,000.`
+Add expense 1-character source: This test case verify adding an expense with the shortest possible source name.
+Test Steps:
+
+- `planner add-expense 50 "Z"`
+- Verify that the output is `Expense added: $50 for source "Z".`
 
 # Test case 9
 
-Add-Income Error Negative Amount: This test case verifies that a negative income amount returns an error.
-Input: `planner add-income -500 "penalty"`
-Expected result: `Error: Amount must be a positive integer up to 100,000.`
+Add income 50-character source: This test case verify adding an income with the maximum allowed source name length.
+Test Steps:
+
+- `planner add-income 200 "ThisIsExactlyA50CharacterLongSourceStringForIncome"`
+- Verify that the output is `Income added: $200 from source "ThisIsExactlyA50CharacterLongSourceStringForIncome".`
 
 # Test case 10
 
-Add-Expense Error Negative Amount: This test case verifies that a negative expense amount returns an error.
-Input: `planner add-expense -20 "fine"`
-Expected result: `Error: Amount must be a positive integer up to 100,000.`
+Add expense 50-character source: This test case verify adding an expense with the maximum allowed source name length.
+Test Steps:
+
+- `planner add-expense 300 "ThisIsExactlyA50CharacterLongSourceStringForExpens"`
+- Verify that the output is `Expense added: $300 for source "ThisIsExactlyA50CharacterLongSourceStringForExpens".`
 
 # Test case 11
 
-Add-Income Error Exceeding Max Amount: This test case verifies that an income greater than 100,000 returns an error.
-Input: `planner add-income 100001 "windfall"`
-Expected result: `Error: Amount must be a positive integer up to 100,000.`
+Add income with spaces: This test case verify adding an income source name containing spaces.
+Test Steps:
+
+- `planner add-income 400 "part time job"`
+- Verify that the output is `Income added: $400 from source "part time job".`
 
 # Test case 12
 
-Add-Expense Error Exceeding Max Amount: This test case verifies that an expense greater than 100,000 returns an error.
-Input: `planner add-expense 105000 "mansion"`
-Expected result: `Error: Amount must be a positive integer up to 100,000.`
+Add expense with special characters: This test case verify adding an expense source name containing special characters.
+Test Steps:
+
+- `planner add-expense 45 "@pple-Music & Spotify!"`
+- Verify that the output is `Expense added: $45 for source "@pple-Music & Spotify!".`
 
 # Test case 13
 
-Add-Income Error Decimal Amount: This test case verifies that non-integer decimal numbers are rejected for income.
-Input: `planner add-income 50.50 "part-time"`
-Expected result: `Error: Amount must be a positive integer up to 100,000.`
+Add income zero amount: This test case verify that adding an income of zero is rejected.
+Test Steps:
+
+- `planner add-income 0 "gift"`
+- Verify that the output is `Error: Amount must be a positive integer.`
 
 # Test case 14
 
-Add-Expense Error Decimal Amount: This test case verifies that non-integer decimal numbers are rejected for expense.
-Input: `planner add-expense 4.99 "coffee"`
-Expected result: `Error: Amount must be a positive integer up to 100,000.`
+Add expense zero amount: This test case verify that adding an expense of zero is rejected.
+Test Steps:
+
+- `planner add-expense 0 "water"`
+- Verify that the output is `Error: Amount must be a positive integer.`
 
 # Test case 15
 
-Add-Income Error Non-numeric Amount: This test case verifies that alpha characters in the amount field are rejected for income.
-Input: `planner add-income abc "salary"`
-Expected result: `Error: Amount must be a positive integer up to 100,000.`
+Add income negative amount: This test case verify that adding a negative income is rejected.
+Test Steps:
+
+- `planner add-income -500 "refund"`
+- Verify that the output is `Error: Amount must be a positive integer.`
 
 # Test case 16
 
-Add-Expense Error Non-numeric Amount: This test case verifies that alpha characters in the amount field are rejected for expense.
-Input: `planner add-expense cash "food"`
-Expected result: `Error: Amount must be a positive integer up to 100,000.`
+Add expense negative amount: This test case verify that adding a negative expense is rejected.
+Test Steps:
+
+- `planner add-expense -10 "fee"`
+- Verify that the output is `Error: Amount must be a positive integer.`
 
 # Test case 17
 
-Add-Income Source Max Length Boundary: This test case verifies that a source name exactly 50 characters long is successfully processed.
-Input: `planner add-income 1000 "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwx"`
-Expected result: `Income added: $1000 from source "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwx".`
+Add income exceeding limit: This test case verify that adding an income over 100,000 is rejected.
+Test Steps:
+
+- `planner add-income 100001 "sale"`
+- Verify that the output is `Error: Amount cannot exceed 100,000.`
 
 # Test case 18
 
-Add-Expense Source Max Length Boundary: This test case verifies that a source name exactly 50 characters long is successfully processed.
-Input: `planner add-expense 200 "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwx"`
-Expected result: `Expense added: $200 for source "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwx".`
+Add expense exceeding limit: This test case verify that adding an expense over 100,000 is rejected.
+Test Steps:
+
+- `planner add-expense 100001 "yacht"`
+- Verify that the output is `Error: Amount cannot exceed 100,000.`
 
 # Test case 19
 
-Add-Income Source Too Long Error: This test case verifies that an income source name over 50 characters returns an error.
-Input: `planner add-income 1000 "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"`
-Expected result: `Error: Source must be a string of 50 characters or less.`
+Add income decimal amount: This test case verify that adding a non-integer income amount is rejected.
+Test Steps:
+
+- `planner add-income 1500.50 "freelance"`
+- Verify that the output is `Error: Amount must be a positive integer.`
 
 # Test case 20
 
-Add-Expense Source Too Long Error: This test case verifies that an expense source name over 50 characters returns an error.
-Input: `planner add-expense 200 "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"`
-Expected result: `Error: Source must be a string of 50 characters or less.`
+Add expense decimal amount: This test case verify that adding a non-integer expense amount is rejected.
+Test Steps:
+
+- `planner add-expense 12.99 "subscription"`
+- Verify that the output is `Error: Amount must be a positive integer.`
 
 # Test case 21
 
-Add-Income Source Empty String Error: This test case verifies that an empty string cannot be used as an income source.
-Input: `planner add-income 500 ""`
-Expected result: `Error: Source cannot be empty.`
+Add income string amount: This test case verify that using a string instead of a number for income amount fails.
+Test Steps:
+
+- `planner add-income "thousand" "bonus"`
+- Verify that the output is `Error: Invalid amount format. Amount must be a positive integer.`
 
 # Test case 22
 
-Add-Expense Source Empty String Error: This test case verifies that an empty string cannot be used as an expense source.
-Input: `planner add-expense 50 ""`
-Expected result: `Error: Source cannot be empty.`
+Add expense string amount: This test case verify that using a string instead of a number for expense amount fails.
+Test Steps:
+
+- `planner add-expense "fifty" "food"`
+- Verify that the output is `Error: Invalid amount format. Amount must be a positive integer.`
 
 # Test case 23
 
-Add-Income Duplicate Source Error: This test case verifies that duplicate income sources with the same name are not allowed.
-Input: `planner add-income 2000 "salary"`
-Expected result: `Error: Income source "salary" already exists.`
+Add income empty source: This test case verify that adding an income with an empty string as source is rejected.
+Test Steps:
+
+- `planner add-income 100 ""`
+- Verify that the output is `Error: Source name cannot be empty.`
 
 # Test case 24
 
-Add-Expense Duplicate Source Error: This test case verifies that duplicate expense sources with the same name are not allowed.
-Input: `planner add-expense 100 "food"`
-Expected result: `Error: Expense source "food" already exists.`
+Add expense empty source: This test case verify that adding an expense with an empty string as source is rejected.
+Test Steps:
+
+- `planner add-expense 50 ""`
+- Verify that the output is `Error: Source name cannot be empty.`
 
 # Test case 25
 
-Duplicate Name in Different Categories: This test case verifies that an income and an expense can share the same source name.
-Input: `planner add-expense 500 "salary"`
-Expected result: `Expense added: $500 for source "salary".`
+Add income exceeding length limit: This test case verify that an income source name over 50 characters is rejected.
+Test Steps:
+
+- `planner add-income 100 "ThisStringIsExactlyFiftyOneCharactersLongToTestFail"`
+- Verify that the output is `Error: Source name must be 50 characters or less.`
 
 # Test case 26
 
-List Incomes Empty State: This test case verifies the output of listing incomes when none have been registered yet.
-Input: `planner list-incomes`
-Expected result: `Total Income: $0`
+Add expense exceeding length limit: This test case verify that an expense source name over 50 characters is rejected.
+Test Steps:
+
+- `planner add-expense 100 "ThisStringIsExactlyFiftyOneCharactersLongToTestFail"`
+- Verify that the output is `Error: Source name must be 50 characters or less.`
 
 # Test case 27
 
-List Expenses Empty State: This test case verifies the output of listing expenses when none have been registered yet.
-Input: `planner list-expenses`
-Expected result: `Total Expense: $0`
+Add duplicate income source: This test case verify that adding an income with an already existing source name is rejected.
+Test Steps:
+
+- `planner add-income 1000 "salary"`
+- `planner add-income 500 "salary"`
+- Verify that the output is `Error: Income source "salary" already exists.`
 
 # Test case 28
 
-List Incomes Multiple Items: This test case verifies the layout and cumulative total calculation when multiple incomes exist.
-Input: `planner list-incomes`
-Expected result: `1. salary: $5000
-2. penny: $1
-3. lottery: $100000
-4. abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwx: $1000
-Total Income: $106001`
+Add duplicate expense source: This test case verify that adding an expense with an already existing source name is rejected.
+Test Steps:
+
+- `planner add-expense 100 "rent"`
+- `planner add-expense 200 "rent"`
+- Verify that the output is `Error: Expense source "rent" already exists.`
 
 # Test case 29
 
-List Expenses Multiple Items: This test case verifies the layout and cumulative total calculation when multiple expenses exist.
-Input: `planner list-expenses`
-Expected result: `1. food: $50
-2. candy: $1
-3. car: $100000
-4. abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwx: $200
-5. salary: $500
-Total Expense: $100751`
+Remove existing income: This test case verify the successful removal of an existing income.
+Test Steps:
+
+- `planner add-income 2000 "salary"`
+- `planner remove-income "salary"`
+- Verify that the output is `Income removed: "salary".`
 
 # Test case 30
 
-Show Budget Balanced/Positive: This test case verifies budget summaries when income exceeds expenses.
-Input: `planner show-budget`
-Expected result: `Total Income: $106001
-Total Expense: $100751
-Balance: $5250`
+Remove existing expense: This test case verify the successful removal of an existing expense.
+Test Steps:
+
+- `planner add-expense 500 "rent"`
+- `planner remove-expense "rent"`
+- Verify that the output is `Expense removed: "rent".`
 
 # Test case 31
 
-Successful Remove-Expense: This test case verifies that an existing expense source can be removed.
-Input: `planner remove-expense "food"`
-Expected result: `Expense removed: "food".`
+Remove non-existent income: This test case verify attempting to remove an income that does not exist.
+Test Steps:
+
+- `planner remove-income "phantom"`
+- Verify that the output is `Error: Income source "phantom" not found.`
 
 # Test case 32
 
-Successful Remove-Income: This test case verifies that an existing income source can be removed.
-Input: `planner remove-income "salary"`
-Expected result: `Income removed: "salary".`
+Remove non-existent expense: This test case verify attempting to remove an expense that does not exist.
+Test Steps:
+
+- `planner remove-expense "ghost"`
+- Verify that the output is `Error: Expense source "ghost" not found.`
 
 # Test case 33
 
-Remove-Income Not Found Error: This test case verifies an error occurs when trying to remove a non-existent income source.
-Input: `planner remove-income "nonexistent"`
-Expected result: `Error: Income source "nonexistent" not found.`
+Missing arguments add-income: This test case verify error handling when amount is missing.
+Test Steps:
+
+- `planner add-income "salary"`
+- Verify that the output is `Error: Missing arguments. Usage: planner add-income <amount> "<source>"`
 
 # Test case 34
 
-Remove-Expense Not Found Error: This test case verifies an error occurs when trying to remove a non-existent expense source.
-Input: `planner remove-expense "nonexistent"`
-Expected result: `Error: Expense source "nonexistent" not found.`
+Missing arguments add-expense: This test case verify error handling when source is missing.
+Test Steps:
+
+- `planner add-expense 100`
+- Verify that the output is `Error: Missing arguments. Usage: planner add-expense <amount> "<source>"`
 
 # Test case 35
 
-List Incomes After Removal: This test case verifies the income list updates dynamically after an income removal.
-Input: `planner list-incomes`
-Expected result: `1. penny: $1
-2. lottery: $100000
-3. abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwx: $1000
-Total Income: $101001`
+List empty incomes: This test case verify the output of listing incomes when none exist.
+Test Steps:
+
+- `planner list-incomes`
+- Verify that the output is `No incomes found.\nTotal Income: $0`
 
 # Test case 36
 
-List Expenses After Removal: This test case verifies the expense list updates dynamically after an expense removal.
-Input: `planner list-expenses`
-Expected result: `1. candy: $1
-2. car: $100000
-3. abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwx: $200
-4. salary: $500
-Total Expense: $100701`
+List empty expenses: This test case verify the output of listing expenses when none exist.
+Test Steps:
+
+- `planner list-expenses`
+- Verify that the output is `No expenses found.\nTotal Expense: $0`
 
 # Test case 37
 
-Show Budget Negative Balance: This test case verifies that the balance calculates correctly into a negative integer when expenses exceed income.
-Input: `planner show-budget`
-Expected result: `Total Income: $101001
-Total Expense: $100701
-Balance: $300`
+List multiple incomes: This test case verify listing multiple incomes and the correct total calculation.
+Test Steps:
+
+- `planner add-income 1000 "job1"`
+- `planner add-income 2000 "job2"`
+- `planner list-incomes`
+- Verify that the output is `1. job1: $1000\n2. job2: $2000\nTotal Income: $3000`
 
 # Test case 38
 
-Add-Income Missing Arguments Error: This test case verifies an error message when missing the source parameter.
-Input: `planner add-income 500`
-Expected result: `Error: Missing arguments. Usage: planner add-income <amount> "<source>"`
+List multiple expenses: This test case verify listing multiple expenses and the correct total calculation.
+Test Steps:
+
+- `planner add-expense 50 "food"`
+- `planner add-expense 100 "transit"`
+- `planner list-expenses`
+- Verify that the output is `1. food: $50\n2. transit: $100\nTotal Expense: $150`
 
 # Test case 39
 
-Add-Expense Missing Arguments Error: This test case verifies an error message when missing all parameters.
-Input: `planner add-expense`
-Expected result: `Error: Missing arguments. Usage: planner add-expense <amount> "<source>"`
+Show budget empty: This test case verify showing the budget when no data is entered.
+Test Steps:
+
+- `planner show-budget`
+- Verify that the output is `Total Income: $0\nTotal Expense: $0\nBalance: $0`
 
 # Test case 40
 
-Remove-Income Missing Arguments Error: This test case verifies an error message when the source name is missing.
-Input: `planner remove-income`
-Expected result: `Error: Missing source argument. Usage: planner remove-income "<source>"`
+Show budget income only: This test case verify showing the budget when only incomes exist.
+Test Steps:
+
+- `planner add-income 5000 "salary"`
+- `planner show-budget`
+- Verify that the output is `Total Income: $5000\nTotal Expense: $0\nBalance: $5000`
 
 # Test case 41
 
-Remove-Expense Missing Arguments Error: This test case verifies an error message when the source name is missing.
-Input: `planner remove-expense`
-Expected result: `Error: Missing source argument. Usage: planner remove-expense "<source>"`
+Show budget expense only: This test case verify showing the budget when only expenses exist.
+Test Steps:
+
+- `planner add-expense 1000 "rent"`
+- `planner show-budget`
+- Verify that the output is `Total Income: $0\nTotal Expense: $1000\nBalance: $-1000`
 
 # Test case 42
 
-Invalid Action Command Error: This test case verifies handling of completely unknown subcommands.
-Input: `planner delete-income "salary"`
-Expected result: `Error: Unknown command "delete-income". Type "planner help" for valid options.`
+Show budget positive balance: This test case verify showing the budget when income exceeds expenses.
+Test Steps:
+
+- `planner add-income 4000 "salary"`
+- `planner add-expense 1500 "rent"`
+- `planner show-budget`
+- Verify that the output is `Total Income: $4000\nTotal Expense: $1500\nBalance: $2500`
 
 # Test case 43
 
-Add-Income Extra Parameters Ignored or Error: This test case verifies that providing extra arguments triggers a syntax warning or error.
-Input: `planner add-income 500 "freelance" "extra_arg"`
-Expected result: `Error: Too many arguments. Usage: planner add-income <amount> "<source>"`
+Show budget negative balance: This test case verify showing the budget when expenses exceed income.
+Test Steps:
+
+- `planner add-income 2000 "salary"`
+- `planner add-expense 3000 "rent"`
+- `planner show-budget`
+- Verify that the output is `Total Income: $2000\nTotal Expense: $3000\nBalance: $-1000`
 
 # Test case 44
 
-Add-Expense Extra Parameters Ignored or Error: This test case verifies that providing extra arguments triggers a syntax warning or error.
-Input: `planner add-expense 50 "lunch" "extra_arg"`
-Expected result: `Error: Too many arguments. Usage: planner add-expense <amount> "<source>"`
+Show budget zero balance: This test case verify showing the budget when income exactly matches expenses.
+Test Steps:
+
+- `planner add-income 1500 "salary"`
+- `planner add-expense 1500 "rent"`
+- `planner show-budget`
+- Verify that the output is `Total Income: $1500\nTotal Expense: $1500\nBalance: $0`
 
 # Test case 45
 
-Re-adding Removed Income: This test case verifies that a previously removed income source name can be registered again.
-Input: `planner add-income 6000 "salary"`
-Expected result: `Income added: $6000 from source "salary".`
+Show budget after additions and removals: This test case verify the budget correctly updates after removing an expense.
+Test Steps:
+
+- `planner add-income 3000 "salary"`
+- `planner add-expense 1000 "rent"`
+- `planner add-expense 500 "food"`
+- `planner remove-expense "rent"`
+- `planner show-budget`
+- Verify that the output is `Total Income: $3000\nTotal Expense: $500\nBalance: $2500`
 
 # Test case 46
 
-Re-adding Removed Expense: This test case verifies that a previously removed expense source name can be registered again.
-Input: `planner add-expense 60 "food"`
-Expected result: `Expense added: $60 for source "food".`
+Case-sensitive income sources: This test case verify that sources with different casing are treated as unique.
+Test Steps:
+
+- `planner add-income 1000 "salary"`
+- `planner add-income 500 "Salary"`
+- `planner list-incomes`
+- Verify that the output is `1. salary: $1000\n2. Salary: $500\nTotal Income: $1500`
 
 # Test case 47
 
-List Incomes Capitalization Sensitivity: This test case verifies that source names are case-sensitive and do not conflict.
-Input: `planner add-income 100 "Salary"`
-Expected result: `Income added: $100 from source "Salary".`
+Case-sensitive expense sources: This test case verify that sources with different casing are treated as unique.
+Test Steps:
+
+- `planner add-expense 100 "food"`
+- `planner add-expense 50 "Food"`
+- `planner list-expenses`
+- Verify that the output is `1. food: $100\n2. Food: $50\nTotal Expense: $150`
 
 # Test case 48
 
-List Expenses Capitalization Sensitivity: This test case verifies that source names are case-sensitive and do not conflict.
-Input: `planner add-expense 20 "Food"`
-Expected result: `Expense added: $20 for source "Food".`
+Overlapping source names across types: This test case verify that an income and expense can share the exact same source name without conflict.
+Test Steps:
+
+- `planner add-income 1000 "freelance"`
+- `planner add-expense 200 "freelance"`
+- `planner show-budget`
+- Verify that the output is `Total Income: $1000\nTotal Expense: $200\nBalance: $800`
 
 # Test case 49
 
-Add-Income Source Limit Constraint: This test case simulates reaching the system capacity constraint (100 income items) and throwing an error on the 101st item.
-Input: `planner add-income 10 "income101"`
-Expected result: `Error: Maximum limit of 100 income sources reached.`
+List incomes after removal: This test case verify that the income list recalculates correctly and updates ordering when an item is removed.
+Test Steps:
+
+- `planner add-income 100 "A"`
+- `planner add-income 200 "B"`
+- `planner remove-income "A"`
+- `planner list-incomes`
+- Verify that the output is `1. B: $200\nTotal Income: $200`
 
 # Test case 50
 
-Add-Expense Source Limit Constraint: This test case simulates reaching the system capacity constraint (100 expense items) and throwing an error on the 101st item.
-Input: `planner add-expense 10 "expense101"`
-Expected result: `Error: Maximum limit of 100 expense sources reached.`
+List expenses after removal: This test case verify that the expense list recalculates correctly and updates ordering when an item is removed.
+Test Steps:
+
+- `planner add-expense 50 "A"`
+- `planner add-expense 75 "B"`
+- `planner remove-expense "A"`
+- `planner list-expenses`
+- Verify that the output is `1. B: $75\nTotal Expense: $75`

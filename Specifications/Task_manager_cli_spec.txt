@@ -1,0 +1,238 @@
+# Task Manager CLI Specification
+
+## Application Name
+`tasker`
+
+## Overview
+The command line application `tasker` allows a user to create, update, complete, reopen, delete, list, and summarize personal tasks.
+
+This is a stateful command line application. It stores tasks created during a test case. It is assumed that no task data exists at the start of each test case.
+
+## Commands
+
+### 1. Add a task
+`tasker add "<title>" --due <date> [--priority <priority>]`
+
+Creates a new task.
+
+Arguments:
+- `<title>`: The task title.
+- `--due <date>`: The due date in `YYYY-MM-DD` format.
+- `--priority <priority>`: Optional. Accepted values are `low`, `medium`, and `high`. If omitted, the default priority is `medium`.
+
+Successful output:
+`Task added: #<id> "<title>" due <date> priority <priority>.`
+
+Rules:
+- Task IDs are assigned automatically starting from `1`.
+- Each new task receives the next available integer ID.
+- Deleted task IDs are not reused.
+- The task status after creation is `todo`.
+
+### 2. Update a task
+`tasker update <id> [--title "<title>"] [--due <date>] [--priority <priority>]`
+
+Updates one or more editable fields of an existing task.
+
+Successful output:
+`Task updated: #<id>.`
+
+Rules:
+- At least one of `--title`, `--due`, or `--priority` must be provided.
+- A completed task can still be updated.
+- The task ID and task status cannot be changed using this command.
+
+### 3. Complete a task
+`tasker complete <id>`
+
+Marks an existing `todo` task as `done`.
+
+Successful output:
+`Task completed: #<id>.`
+
+Rules:
+- Only a task with status `todo` can be completed.
+- Completing an already completed task is invalid.
+
+### 4. Reopen a task
+`tasker reopen <id>`
+
+Changes an existing `done` task back to `todo`.
+
+Successful output:
+`Task reopened: #<id>.`
+
+Rules:
+- Only a task with status `done` can be reopened.
+- Reopening a task that is already `todo` is invalid.
+
+### 5. Delete a task
+`tasker delete <id>`
+
+Deletes an existing task.
+
+Successful output:
+`Task deleted: #<id>.`
+
+Rules:
+- Both `todo` and `done` tasks can be deleted.
+- Deleted tasks must not appear in `list` or `summary` output.
+
+### 6. List tasks
+`tasker list [--status <status>] [--sort <sort_key>]`
+
+Displays tasks matching the selected status filter.
+
+Options:
+- `--status <status>`: Optional. Accepted values are `todo`, `done`, and `all`. Default is `all`.
+- `--sort <sort_key>`: Optional. Accepted values are `created`, `due`, and `priority`. Default is `created`.
+
+Successful output for non-empty result:
+```
+1. #<id> [<status>] <title> | due: <date> | priority: <priority>
+2. #<id> [<status>] <title> | due: <date> | priority: <priority>
+Total: <n> task(s)
+```
+
+Successful output for empty result:
+`No tasks found.`
+
+Sorting rules:
+- `created`: ascending by task ID.
+- `due`: ascending by due date. If due dates are equal, sort by task ID ascending.
+- `priority`: sort by priority severity from `high` to `medium` to `low`. If priorities are equal, sort by task ID ascending.
+
+### 7. Show summary
+`tasker summary`
+
+Displays the number of tasks by status.
+
+Successful output:
+```
+Todo: <todo_count>
+Done: <done_count>
+Total: <total_count>
+```
+
+## Input Constraints
+
+### Title
+- Must be between 1 and 80 characters after trimming leading and trailing spaces.
+- May contain letters, digits, spaces, hyphens, underscores, commas, periods, colons, and parentheses.
+- Must not be blank.
+- Quotation marks are only used to delimit the title in the command and are not part of the stored title.
+
+### Due Date
+- Must use the exact format `YYYY-MM-DD`.
+- Must be a real calendar date.
+- Accepted year range: `2000` to `2099`, inclusive.
+- Leap-year rules must be handled correctly.
+
+### Priority
+- Accepted values: `low`, `medium`, `high`.
+- Values are case-sensitive. For example, `High` is invalid.
+
+### Status
+- Accepted values for `--status`: `todo`, `done`, `all`.
+- Values are case-sensitive.
+
+### Sort Key
+- Accepted values for `--sort`: `created`, `due`, `priority`.
+- Values are case-sensitive.
+
+### ID
+- Must be a positive integer.
+- The ID must refer to an existing non-deleted task.
+
+### Storage Limit
+- At most 100 non-deleted tasks can exist at the same time.
+- Adding the 101st active task is invalid.
+- If a task is deleted, one active-task slot becomes available again.
+
+## Error Handling
+For invalid input, output an appropriate and descriptive error message.
+
+Examples:
+- Missing required command or option.
+- Unknown command.
+- Unknown option.
+- Invalid title.
+- Invalid due date format.
+- Invalid calendar date.
+- Due date year outside the accepted range.
+- Invalid priority.
+- Invalid status filter.
+- Invalid sort key.
+- Invalid ID.
+- ID not found.
+- Trying to complete an already completed task.
+- Trying to reopen a task that is already todo.
+- Updating a task without providing any editable field.
+- Adding a task when the active task limit has been reached.
+
+## Usage Examples
+
+```
+$ tasker add "Write report" --due 2026-07-01 --priority high
+Task added: #1 "Write report" due 2026-07-01 priority high.
+
+$ tasker add "Review slides" --due 2026-06-28
+Task added: #2 "Review slides" due 2026-06-28 priority medium.
+
+$ tasker complete 1
+Task completed: #1.
+
+$ tasker list --status all --sort due
+1. #2 [todo] Review slides | due: 2026-06-28 | priority: medium
+2. #1 [done] Write report | due: 2026-07-01 | priority: high
+Total: 2 task(s)
+
+$ tasker summary
+Todo: 1
+Done: 1
+Total: 2
+```
+
+## Test Category Set
+
+### Category 1: Functional State and Workflow Behavior
+This category covers valid task workflows and state transitions:
+- Adding tasks.
+- Updating one or multiple fields.
+- Completing tasks.
+- Reopening tasks.
+- Deleting tasks.
+- Listing tasks after state changes.
+- Generating summaries after state changes.
+- Ensuring deleted IDs are not reused.
+
+### Category 2: Input Validation and Boundary Behavior
+This category covers invalid and boundary input:
+- Missing required arguments.
+- Invalid commands and options.
+- Invalid title length or characters.
+- Invalid date format, invalid calendar dates, and leap-year boundaries.
+- Invalid priority, status, and sort values.
+- Invalid, missing, deleted, or non-existing IDs.
+- Active task limit at 100 tasks.
+- Case sensitivity of enum values.
+
+## Test Viewpoints
+
+1. Command grammar viewpoint:
+   Verify that each command accepts only the documented syntax and rejects missing, duplicated, or unknown options.
+
+2. Equivalence partitioning viewpoint:
+   Partition input into valid and invalid classes for title, due date, priority, status, sort key, ID, and active task count.
+
+3. Boundary value viewpoint:
+   Test title lengths 0, 1, 80, and 81; due years 1999, 2000, 2099, and 2100; active task counts 99, 100, and 101.
+
+4. State transition viewpoint:
+   Verify legal transitions `todo -> done`, `done -> todo`, and invalid repeated transitions such as completing an already done task.
+
+5. Data consistency viewpoint:
+   Verify that list and summary outputs remain consistent after add, update, complete, reopen, and delete operations.
+
+6. Ordering and filtering viewpoint:
+   Verify filtering by status and sorting by created order, due date, and priority.

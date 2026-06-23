@@ -1,0 +1,377 @@
+# Test case 1
+
+Meter to foot conversion: This test case verify conversion from meter to foot using an integer value.
+Input: `<name> --from meter --to foot --value 10`
+Expected result: `Result: 32.81 feet`
+
+# Test case 2
+
+Meter to mile conversion with small result: This test case verify conversion from meter to mile where the rounded output becomes 0.00.
+Input: `<name> --from meter --to mile --value 1`
+Expected result: `Result: 0.00 miles`
+
+# Test case 3
+
+Meter to yard conversion with decimal value: This test case verify conversion from meter to yard using a one-decimal value.
+Input: `<name> --from meter --to yard --value 5.5`
+Expected result: `Result: 6.01 yards`
+
+# Test case 4
+
+Maximum meter to mile conversion: This test case verify conversion from meter to mile using the maximum allowed value.
+Input: `<name> --from meter --to mile --value 1000.00`
+Expected result: `Result: 0.62 miles`
+
+# Test case 5
+
+Mile to meter conversion: This test case verify conversion from mile to meter using a decimal value.
+Input: `<name> --from mile --to meter --value 2.25`
+Expected result: `Result: 3621.02 meters`
+
+# Test case 6
+
+Mile to yard conversion: This test case verify conversion from mile to yard.
+Input: `<name> --from mile --to yard --value 1`
+Expected result: `Result: 1760.00 yards`
+
+# Test case 7
+
+Mile to foot conversion: This test case verify conversion from mile to foot using a small positive decimal value.
+Input: `<name> --from mile --to foot --value 0.01`
+Expected result: `Result: 52.80 feet`
+
+# Test case 8
+
+Maximum mile to meter conversion: This test case verify conversion from mile to meter using a value close to the maximum allowed value.
+Input: `<name> --from mile --to meter --value 999.99`
+Expected result: `Result: 1609327.91 meters`
+
+# Test case 9
+
+Yard to meter conversion: This test case verify conversion from yard to meter.
+Input: `<name> --from yard --to meter --value 3`
+Expected result: `Result: 2.74 meters`
+
+# Test case 10
+
+Yard to foot conversion: This test case verify conversion from yard to foot using a decimal value.
+Input: `<name> --from yard --to foot --value 12.5`
+Expected result: `Result: 37.50 feet`
+
+# Test case 11
+
+Yard to mile conversion: This test case verify conversion from yard to mile.
+Input: `<name> --from yard --to mile --value 1000`
+Expected result: `Result: 0.57 miles`
+
+# Test case 12
+
+Minimum positive yard to meter conversion: This test case verify conversion from yard to meter using the smallest valid two-decimal positive value.
+Input: `<name> --from yard --to meter --value 0.01`
+Expected result: `Result: 0.01 meters`
+
+# Test case 13
+
+Foot to meter conversion: This test case verify conversion from foot to meter.
+Input: `<name> --from foot --to meter --value 8`
+Expected result: `Result: 2.44 meters`
+
+# Test case 14
+
+Foot to yard conversion: This test case verify conversion from foot to yard.
+Input: `<name> --from foot --to yard --value 6`
+Expected result: `Result: 2.00 yards`
+
+# Test case 15
+
+Foot to mile conversion: This test case verify conversion from foot to mile.
+Input: `<name> --from foot --to mile --value 1000`
+Expected result: `Result: 0.19 miles`
+
+# Test case 16
+
+Minimum positive foot to meter conversion: This test case verify conversion from foot to meter using the smallest valid two-decimal positive value.
+Input: `<name> --from foot --to meter --value 0.01`
+Expected result: `Result: 0.00 meters`
+
+# Test case 17
+
+Minimum positive meter to foot conversion: This test case verify conversion from meter to foot using the smallest valid two-decimal positive value.
+Input: `<name> --from meter --to foot --value 0.01`
+Expected result: `Result: 0.03 feet`
+
+# Test case 18
+
+Meter to yard rounding behavior: This test case verify conversion rounding from meter to yard.
+Input: `<name> --from meter --to yard --value 123.45`
+Expected result: `Result: 135.01 yards`
+
+# Test case 19
+
+Yard to foot near maximum value: This test case verify conversion from yard to foot using a value close to the maximum allowed value.
+Input: `<name> --from yard --to foot --value 999.99`
+Expected result: `Result: 2999.97 feet`
+
+# Test case 20
+
+Foot to yard near maximum value: This test case verify conversion from foot to yard using a value close to the maximum allowed value.
+Input: `<name> --from foot --to yard --value 999.99`
+Expected result: `Result: 333.33 yards`
+
+# Test case 21
+
+Celsius to Fahrenheit conversion: This test case verify conversion from Celsius to Fahrenheit.
+Input: `<name> --from celsius --to fahrenheit --value 100`
+Expected result: `Result: 212.00 Fahrenheit`
+
+# Test case 22
+
+Celsius to Kelvin conversion: This test case verify conversion from Celsius to Kelvin.
+Input: `<name> --from celsius --to kelvin --value 0`
+Expected result: `Result: 273.15 Kelvin`
+
+# Test case 23
+
+Negative Celsius to Fahrenheit conversion: This test case verify conversion from Celsius to Fahrenheit using a valid negative temperature.
+Input: `<name> --from celsius --to fahrenheit --value -40`
+Expected result: `Result: -40.00 Fahrenheit`
+
+# Test case 24
+
+Absolute zero Celsius to Kelvin conversion: This test case verify conversion from Celsius to Kelvin at absolute zero.
+Input: `<name> --from celsius --to kelvin --value -273.15`
+Expected result: `Result: 0.00 Kelvin`
+
+# Test case 25
+
+Decimal Celsius to Fahrenheit conversion: This test case verify conversion from Celsius to Fahrenheit using a one-decimal value.
+Input: `<name> --from celsius --to fahrenheit --value 37.5`
+Expected result: `Result: 99.50 Fahrenheit`
+
+# Test case 26
+
+Maximum Celsius to Fahrenheit conversion: This test case verify conversion from Celsius to Fahrenheit using the maximum allowed value.
+Input: `<name> --from celsius --to fahrenheit --value 1000.00`
+Expected result: `Result: 1832.00 Fahrenheit`
+
+# Test case 27
+
+Fahrenheit to Celsius conversion: This test case verify conversion from Fahrenheit to Celsius.
+Input: `<name> --from fahrenheit --to celsius --value 32`
+Expected result: `Result: 0.00 Celsius`
+
+# Test case 28
+
+Fahrenheit to Kelvin conversion: This test case verify conversion from Fahrenheit to Kelvin.
+Input: `<name> --from fahrenheit --to kelvin --value 212`
+Expected result: `Result: 373.15 Kelvin`
+
+# Test case 29
+
+Negative Fahrenheit to Celsius conversion: This test case verify conversion from Fahrenheit to Celsius using a valid negative temperature.
+Input: `<name> --from fahrenheit --to celsius --value -40`
+Expected result: `Result: -40.00 Celsius`
+
+# Test case 30
+
+Absolute zero Fahrenheit to Kelvin conversion: This test case verify conversion from Fahrenheit to Kelvin at absolute zero.
+Input: `<name> --from fahrenheit --to kelvin --value -459.67`
+Expected result: `Result: 0.00 Kelvin`
+
+# Test case 31
+
+Body temperature Fahrenheit to Celsius conversion: This test case verify conversion from Fahrenheit to Celsius using a decimal value.
+Input: `<name> --from fahrenheit --to celsius --value 98.6`
+Expected result: `Result: 37.00 Celsius`
+
+# Test case 32
+
+Maximum Fahrenheit to Kelvin conversion: This test case verify conversion from Fahrenheit to Kelvin using the maximum allowed value.
+Input: `<name> --from fahrenheit --to kelvin --value 1000`
+Expected result: `Result: 810.93 Kelvin`
+
+# Test case 33
+
+Kelvin to Celsius conversion: This test case verify conversion from Kelvin to Celsius.
+Input: `<name> --from kelvin --to celsius --value 273.15`
+Expected result: `Result: 0.00 Celsius`
+
+# Test case 34
+
+Kelvin to Fahrenheit conversion: This test case verify conversion from Kelvin to Fahrenheit.
+Input: `<name> --from kelvin --to fahrenheit --value 300`
+Expected result: `Result: 80.33 Fahrenheit`
+
+# Test case 35
+
+Small positive Kelvin to Celsius conversion: This test case verify conversion from Kelvin to Celsius using a small positive value.
+Input: `<name> --from kelvin --to celsius --value 1`
+Expected result: `Result: -272.15 Celsius`
+
+# Test case 36
+
+Maximum Kelvin to Fahrenheit conversion: This test case verify conversion from Kelvin to Fahrenheit using the maximum allowed value.
+Input: `<name> --from kelvin --to fahrenheit --value 1000`
+Expected result: `Result: 1340.33 Fahrenheit`
+
+# Test case 37
+
+Minimum positive Kelvin to Celsius conversion: This test case verify conversion from Kelvin to Celsius using the smallest valid two-decimal positive value.
+Input: `<name> --from kelvin --to celsius --value 0.01`
+Expected result: `Result: -273.14 Celsius`
+
+# Test case 38
+
+Options in different order: This test case verify that valid options work regardless of command option order.
+Input: `<name> --value 10 --to foot --from meter`
+Expected result: `Result: 32.81 feet`
+
+# Test case 39
+
+Missing source option: This test case verify error handling when --from is missing.
+Input: `<name> --to foot --value 10`
+Expected result: `Error: missing required option --from.`
+
+# Test case 40
+
+Missing target option: This test case verify error handling when --to is missing.
+Input: `<name> --from meter --value 10`
+Expected result: `Error: missing required option --to.`
+
+# Test case 41
+
+Missing value option: This test case verify error handling when --value is missing.
+Input: `<name> --from meter --to foot`
+Expected result: `Error: missing required option --value.`
+
+# Test case 42
+
+Missing value after source option: This test case verify error handling when --from has no unit value.
+Input: `<name> --from --to foot --value 10`
+Expected result: `Error: option --from requires a source unit.`
+
+# Test case 43
+
+Missing value after target option: This test case verify error handling when --to has no unit value.
+Input: `<name> --from meter --to --value 10`
+Expected result: `Error: option --to requires a target unit.`
+
+# Test case 44
+
+Missing value after value option: This test case verify error handling when --value has no numeric value.
+Input: `<name> --from meter --to foot --value`
+Expected result: `Error: option --value requires a numeric value.`
+
+# Test case 45
+
+Unsupported source unit: This test case verify error handling when the source unit is not in the accepted unit list.
+Input: `<name> --from inch --to foot --value 10`
+Expected result: `Error: unsupported source unit "inch". Supported units are meter, mile, yard, foot, celsius, fahrenheit, kelvin.`
+
+# Test case 46
+
+Unsupported target unit: This test case verify error handling when the target unit is not in the accepted unit list.
+Input: `<name> --from meter --to inch --value 10`
+Expected result: `Error: unsupported target unit "inch". Supported units are meter, mile, yard, foot, celsius, fahrenheit, kelvin.`
+
+# Test case 47
+
+Case-sensitive unit rejection: This test case verify that units outside the accepted lowercase names are rejected.
+Input: `<name> --from Meter --to foot --value 10`
+Expected result: `Error: unsupported source unit "Meter". Unit names must be one of meter, mile, yard, foot, celsius, fahrenheit, kelvin.`
+
+# Test case 48
+
+Same length source and target unit: This test case verify error handling when source and target length units are the same.
+Input: `<name> --from meter --to meter --value 10`
+Expected result: `Error: source unit and target unit must be different.`
+
+# Test case 49
+
+Same temperature source and target unit: This test case verify error handling when source and target temperature units are the same.
+Input: `<name> --from celsius --to celsius --value 10`
+Expected result: `Error: source unit and target unit must be different.`
+
+# Test case 50
+
+Length to temperature category mismatch: This test case verify error handling when converting from a length unit to a temperature unit.
+Input: `<name> --from meter --to celsius --value 10`
+Expected result: `Error: cannot convert between length and temperature units.`
+
+# Test case 51
+
+Temperature to length category mismatch: This test case verify error handling when converting from a temperature unit to a length unit.
+Input: `<name> --from fahrenheit --to foot --value 10`
+Expected result: `Error: cannot convert between temperature and length units.`
+
+# Test case 52
+
+Non-numeric value: This test case verify error handling when value is not numeric.
+Input: `<name> --from meter --to foot --value abc`
+Expected result: `Error: value must be an integer or real number.`
+
+# Test case 53
+
+Value with unit suffix: This test case verify error handling when the numeric value contains extra characters.
+Input: `<name> --from meter --to foot --value 10m`
+Expected result: `Error: value must be an integer or real number without unit suffixes.`
+
+# Test case 54
+
+Value with too many decimal places: This test case verify error handling when value has more than two decimal places.
+Input: `<name> --from meter --to foot --value 1.234`
+Expected result: `Error: value must have at most two decimal places.`
+
+# Test case 55
+
+Value greater than maximum: This test case verify error handling when value is greater than 1000.00.
+Input: `<name> --from meter --to foot --value 1000.01`
+Expected result: `Error: value must be less than or equal to 1000.00.`
+
+# Test case 56
+
+Zero length value: This test case verify error handling when converting length with zero value.
+Input: `<name> --from meter --to foot --value 0`
+Expected result: `Error: length conversion value must be positive.`
+
+# Test case 57
+
+Negative length value: This test case verify error handling when converting length with a negative value.
+Input: `<name> --from yard --to meter --value -1`
+Expected result: `Error: length conversion value must be positive.`
+
+# Test case 58
+
+Zero Kelvin source value: This test case verify error handling when source unit is kelvin and value is zero.
+Input: `<name> --from kelvin --to celsius --value 0`
+Expected result: `Error: kelvin source value must be positive.`
+
+# Test case 59
+
+Negative Kelvin source value: This test case verify error handling when source unit is kelvin and value is negative.
+Input: `<name> --from kelvin --to fahrenheit --value -5`
+Expected result: `Error: kelvin source value must be positive.`
+
+# Test case 60
+
+Unsupported option name: This test case verify error handling when an unknown command option is used.
+Input: `<name> --source meter --to foot --value 10`
+Expected result: `Error: unknown option --source. Use --from, --to, and --value.`
+
+# Test case 61
+
+Extra unexpected argument: This test case verify error handling when an unexpected positional argument is provided.
+Input: `<name> --from meter --to foot --value 10 extra`
+Expected result: `Error: unexpected argument "extra".`
+
+# Test case 62
+
+Below absolute zero Celsius to Kelvin: This test case verify error handling when Celsius input would result in an invalid negative Kelvin value.
+Input: `<name> --from celsius --to kelvin --value -274`
+Expected result: `Error: temperature cannot be below absolute zero.`
+
+# Test case 63
+
+Below absolute zero Fahrenheit to Kelvin: This test case verify error handling when Fahrenheit input would result in an invalid negative Kelvin value.
+Input: `<name> --from fahrenheit --to kelvin --value -460`
+Expected result: `Error: temperature cannot be below absolute zero.`

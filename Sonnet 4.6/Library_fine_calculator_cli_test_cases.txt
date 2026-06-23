@@ -1,0 +1,456 @@
+# finecalc Test Cases
+
+---
+
+# Test case 1
+Book basic overdue fine (below cap): This test case verifies that a book overdue by 10 days at $0.50/day produces the correct fine with no cap, discount, or lost fee applied.
+Input: `finecalc --type book --days-late 10 --member no --lost no`
+Expected result: `Total fine: $5.00`
+
+---
+
+# Test case 2
+DVD basic overdue fine (below cap): This test case verifies that a DVD overdue by 10 days at $1.00/day produces the correct fine with no cap, discount, or lost fee applied.
+Input: `finecalc --type dvd --days-late 10 --member no --lost no`
+Expected result: `Total fine: $10.00`
+
+---
+
+# Test case 3
+Book overdue fine at exactly the cap boundary: This test case verifies that a book overdue by exactly 40 days produces a fine that hits the $20.00 cap (40 × $0.50 = $20.00).
+Input: `finecalc --type book --days-late 40 --member no --lost no`
+Expected result: `Total fine: $20.00`
+
+---
+
+# Test case 4
+Book overdue fine above cap is capped at $20.00: This test case verifies that a book overdue by 60 days (which would be $30.00 uncapped) is capped at $20.00.
+Input: `finecalc --type book --days-late 60 --member no --lost no`
+Expected result: `Total fine: $20.00`
+
+---
+
+# Test case 5
+DVD overdue fine at exactly the cap boundary: This test case verifies that a DVD overdue by exactly 30 days produces a fine that hits the $30.00 cap (30 × $1.00 = $30.00).
+Input: `finecalc --type dvd --days-late 30 --member no --lost no`
+Expected result: `Total fine: $30.00`
+
+---
+
+# Test case 6
+DVD overdue fine above cap is capped at $30.00: This test case verifies that a DVD overdue by 60 days (which would be $60.00 uncapped) is capped at $30.00.
+Input: `finecalc --type dvd --days-late 60 --member no --lost no`
+Expected result: `Total fine: $30.00`
+
+---
+
+# Test case 7
+Book member discount applied to below-cap overdue fine: This test case verifies that a 50% member discount is correctly applied to a book overdue fine that has not been capped.
+Input: `finecalc --type book --days-late 10 --member yes --lost no`
+Expected result: `Total fine: $2.50`
+
+---
+
+# Test case 8
+DVD member discount applied to below-cap overdue fine: This test case verifies that a 50% member discount is correctly applied to a DVD overdue fine that has not been capped.
+Input: `finecalc --type dvd --days-late 10 --member yes --lost no`
+Expected result: `Total fine: $5.00`
+
+---
+
+# Test case 9
+Book member discount applied after cap: This test case verifies that the 50% member discount is applied to the capped overdue fine ($20.00), not the uncapped amount.
+Input: `finecalc --type book --days-late 60 --member yes --lost no`
+Expected result: `Total fine: $10.00`
+
+---
+
+# Test case 10
+DVD member discount applied after cap: This test case verifies that the 50% member discount is applied to the capped DVD overdue fine ($30.00), not the uncapped amount.
+Input: `finecalc --type dvd --days-late 60 --member yes --lost no`
+Expected result: `Total fine: $15.00`
+
+---
+
+# Test case 11
+Book lost fee only (0 days late, non-member): This test case verifies that when a book is lost with 0 overdue days, only the $25.00 replacement fee is charged.
+Input: `finecalc --type book --days-late 0 --member no --lost yes`
+Expected result: `Total fine: $25.00`
+
+---
+
+# Test case 12
+DVD lost fee only (0 days late, non-member): This test case verifies that when a DVD is lost with 0 overdue days, only the $40.00 replacement fee is charged.
+Input: `finecalc --type dvd --days-late 0 --member no --lost yes`
+Expected result: `Total fine: $40.00`
+
+---
+
+# Test case 13
+Book lost fee added to below-cap overdue fine (non-member): This test case verifies that the $25.00 replacement fee is correctly added to a below-cap book overdue fine.
+Input: `finecalc --type book --days-late 10 --member no --lost yes`
+Expected result: `Total fine: $30.00`
+
+---
+
+# Test case 14
+DVD lost fee added to below-cap overdue fine (non-member): This test case verifies that the $40.00 replacement fee is correctly added to a below-cap DVD overdue fine.
+Input: `finecalc --type dvd --days-late 10 --member no --lost yes`
+Expected result: `Total fine: $50.00`
+
+---
+
+# Test case 15
+Book: cap + no discount + lost fee: This test case verifies that the capped book overdue fine ($20.00) plus the $25.00 replacement fee totals $45.00 for a non-member.
+Input: `finecalc --type book --days-late 60 --member no --lost yes`
+Expected result: `Total fine: $45.00`
+
+---
+
+# Test case 16
+DVD: cap + no discount + lost fee: This test case verifies that the capped DVD overdue fine ($30.00) plus the $40.00 replacement fee totals $70.00 for a non-member.
+Input: `finecalc --type dvd --days-late 60 --member no --lost yes`
+Expected result: `Total fine: $70.00`
+
+---
+
+# Test case 17
+Book: below-cap + member discount + lost fee: This test case verifies that the member discount applies only to the overdue fine and the lost replacement fee is added without discount.
+Input: `finecalc --type book --days-late 10 --member yes --lost yes`
+Expected result: `Total fine: $27.50`
+
+---
+
+# Test case 18
+DVD: below-cap + member discount + lost fee: This test case verifies that the 50% discount on the DVD overdue fine is calculated separately from the replacement fee.
+Input: `finecalc --type dvd --days-late 10 --member yes --lost yes`
+Expected result: `Total fine: $45.00`
+
+---
+
+# Test case 19
+Book: cap + member discount + lost fee (spec example): This test case verifies the combined scenario from the spec usage examples — book, 50 days late, member, lost.
+Input: `finecalc --type book --days-late 50 --member yes --lost yes`
+Expected result: `Total fine: $35.00`
+
+---
+
+# Test case 20
+DVD: cap + member discount + lost fee (spec example): This test case verifies the combined scenario from the spec calculation examples — DVD, 40 days late, member, lost.
+Input: `finecalc --type dvd --days-late 40 --member yes --lost yes`
+Expected result: `Total fine: $55.00`
+
+---
+
+# Test case 21
+Book: 0 days late, member, lost (spec example): This test case verifies spec Example 3 — a book that is lost but not overdue, with a member discount, results in only the replacement fee.
+Input: `finecalc --type book --days-late 0 --member yes --lost yes`
+Expected result: `Total fine: $25.00`
+
+---
+
+# Test case 22
+DVD: 0 days late, member, lost: This test case verifies that a lost DVD with 0 overdue days and member status charges only the $40.00 replacement fee (member discount on $0 overdue is $0).
+Input: `finecalc --type dvd --days-late 0 --member yes --lost yes`
+Expected result: `Total fine: $40.00`
+
+---
+
+# Test case 23
+Days-late boundary: 0 (minimum valid value): This test case verifies that 0 is an accepted days-late value and produces a $0.00 overdue fine for a book with no lost fee.
+Input: `finecalc --type book --days-late 0 --member no --lost no`
+Expected result: `Total fine: $0.00`
+
+---
+
+# Test case 24
+Days-late boundary: 1 (one above minimum): This test case verifies that 1 is a valid days-late value and that a book overdue by 1 day incurs a $0.50 fine.
+Input: `finecalc --type book --days-late 1 --member no --lost no`
+Expected result: `Total fine: $0.50`
+
+---
+
+# Test case 25
+Days-late boundary: 39 (one below book cap boundary): This test case verifies that 39 days for a book ($19.50) remains below the $20.00 cap.
+Input: `finecalc --type book --days-late 39 --member no --lost no`
+Expected result: `Total fine: $19.50`
+
+---
+
+# Test case 26
+Days-late boundary: 40 (book cap boundary): This test case verifies that 40 days for a book produces exactly $20.00, at the cap limit.
+Input: `finecalc --type book --days-late 40 --member no --lost no`
+Expected result: `Total fine: $20.00`
+
+---
+
+# Test case 27
+Days-late boundary: 29 (one below DVD cap boundary): This test case verifies that 29 days for a DVD ($29.00) remains below the $30.00 cap.
+Input: `finecalc --type dvd --days-late 29 --member no --lost no`
+Expected result: `Total fine: $29.00`
+
+---
+
+# Test case 28
+Days-late boundary: 31 (one above DVD cap boundary): This test case verifies that 31 days for a DVD hits the $30.00 cap (confirmed in spec usage example).
+Input: `finecalc --type dvd --days-late 31 --member no --lost no`
+Expected result: `Total fine: $30.00`
+
+---
+
+# Test case 29
+Days-late boundary: 365 (maximum valid value): This test case verifies that 365 is a valid days-late value and that the fine is still capped correctly for a book.
+Input: `finecalc --type book --days-late 365 --member no --lost no`
+Expected result: `Total fine: $20.00`
+
+---
+
+# Test case 30
+Days-late boundary: 365, DVD (maximum valid value): This test case verifies that 365 is a valid days-late value and the fine is capped for a DVD.
+Input: `finecalc --type dvd --days-late 365 --member no --lost no`
+Expected result: `Total fine: $30.00`
+
+---
+
+# Test case 31
+Output formatting: whole-dollar fine has two decimal places: This test case verifies that a whole-dollar result is always formatted with exactly two decimal places (e.g., $4.00 not $4).
+Input: `finecalc --type book --days-late 8 --member no --lost no`
+Expected result: `Total fine: $4.00`
+
+---
+
+# Test case 32
+Output formatting: fine ending in .50 has two decimal places: This test case verifies that a fine of $0.50 is formatted with exactly two decimal places.
+Input: `finecalc --type book --days-late 1 --member no --lost no`
+Expected result: `Total fine: $0.50`
+
+---
+
+# Test case 33
+Independence: repeat identical invocation produces same result: This test case verifies stateless behavior by confirming a second invocation with the same arguments returns the same result, independent of any prior state.
+Input: `finecalc --type book --days-late 10 --member no --lost no`
+Expected result: `Total fine: $5.00`
+
+---
+
+# Test case 34
+Independence: different invocations do not affect each other: This test case verifies that a DVD invocation is not affected by a prior book invocation and returns a correct, independent result.
+Input: `finecalc --type dvd --days-late 10 --member no --lost no`
+Expected result: `Total fine: $10.00`
+
+---
+
+# Test case 35
+Error: missing --type option: This test case verifies that omitting the --type option produces a descriptive error message.
+Input: `finecalc --days-late 10 --member no --lost no`
+Expected result: `Error: Missing required option: --type`
+
+---
+
+# Test case 36
+Error: missing --days-late option: This test case verifies that omitting the --days-late option produces a descriptive error message.
+Input: `finecalc --type book --member no --lost no`
+Expected result: `Error: Missing required option: --days-late`
+
+---
+
+# Test case 37
+Error: missing --member option: This test case verifies that omitting the --member option produces a descriptive error message.
+Input: `finecalc --type book --days-late 10 --lost no`
+Expected result: `Error: Missing required option: --member`
+
+---
+
+# Test case 38
+Error: missing --lost option: This test case verifies that omitting the --lost option produces a descriptive error message.
+Input: `finecalc --type book --days-late 10 --member no`
+Expected result: `Error: Missing required option: --lost`
+
+---
+
+# Test case 39
+Error: all options missing (no arguments): This test case verifies that invoking the command with no arguments produces a descriptive error about missing required options.
+Input: `finecalc`
+Expected result: `Error: Missing required options: --type, --days-late, --member, --lost`
+
+---
+
+# Test case 40
+Error: unknown option provided: This test case verifies that an unrecognized option flag produces a descriptive error message.
+Input: `finecalc --type book --days-late 10 --member no --lost no --discount yes`
+Expected result: `Error: Unknown option: --discount`
+
+---
+
+# Test case 41
+Error: duplicate --type option: This test case verifies that providing the --type option more than once produces a descriptive error message.
+Input: `finecalc --type book --type dvd --days-late 10 --member no --lost no`
+Expected result: `Error: Duplicate option: --type`
+
+---
+
+# Test case 42
+Error: duplicate --days-late option: This test case verifies that providing the --days-late option more than once produces a descriptive error message.
+Input: `finecalc --type book --days-late 10 --days-late 20 --member no --lost no`
+Expected result: `Error: Duplicate option: --days-late`
+
+---
+
+# Test case 43
+Error: invalid item type value: This test case verifies that an unrecognized item type (e.g., "magazine") produces a descriptive error message.
+Input: `finecalc --type magazine --days-late 10 --member no --lost no`
+Expected result: `Error: Invalid value for --type: "magazine". Accepted values are: book, dvd`
+
+---
+
+# Test case 44
+Error: item type with wrong casing (uppercase): This test case verifies that "Book" (capital B) is rejected due to case-sensitive matching.
+Input: `finecalc --type Book --days-late 10 --member no --lost no`
+Expected result: `Error: Invalid value for --type: "Book". Accepted values are: book, dvd`
+
+---
+
+# Test case 45
+Error: item type with wrong casing (all caps): This test case verifies that "DVD" (all caps) is rejected due to case-sensitive matching.
+Input: `finecalc --type DVD --days-late 10 --member no --lost no`
+Expected result: `Error: Invalid value for --type: "DVD". Accepted values are: book, dvd`
+
+---
+
+# Test case 46
+Error: days-late value of -1 (below minimum): This test case verifies that -1 is rejected as a days-late value below the allowed range of 0–365.
+Input: `finecalc --type book --days-late -1 --member no --lost no`
+Expected result: `Error: Invalid value for --days-late: "-1". Value must be an integer between 0 and 365`
+
+---
+
+# Test case 47
+Error: days-late value of 366 (above maximum): This test case verifies that 366 is rejected as a days-late value above the allowed range of 0–365.
+Input: `finecalc --type book --days-late 366 --member no --lost no`
+Expected result: `Error: Invalid value for --days-late: "366". Value must be an integer between 0 and 365`
+
+---
+
+# Test case 48
+Error: days-late decimal value: This test case verifies that a decimal number (e.g., 10.5) is rejected as an invalid non-integer days-late value.
+Input: `finecalc --type book --days-late 10.5 --member no --lost no`
+Expected result: `Error: Invalid value for --days-late: "10.5". Value must be an integer between 0 and 365`
+
+---
+
+# Test case 49
+Error: days-late non-numeric value: This test case verifies that a non-numeric string (e.g., "ten") is rejected as an invalid days-late value.
+Input: `finecalc --type book --days-late ten --member no --lost no`
+Expected result: `Error: Invalid value for --days-late: "ten". Value must be an integer between 0 and 365`
+
+---
+
+# Test case 50
+Error: days-late empty string: This test case verifies that an empty string provided for --days-late is rejected with a descriptive error.
+Input: `finecalc --type book --days-late "" --member no --lost no`
+Expected result: `Error: Invalid value for --days-late: "". Value must be an integer between 0 and 365`
+
+---
+
+# Test case 51
+Error: member status invalid value: This test case verifies that an unrecognized value for --member (e.g., "true") produces a descriptive error.
+Input: `finecalc --type book --days-late 10 --member true --lost no`
+Expected result: `Error: Invalid value for --member: "true". Accepted values are: yes, no`
+
+---
+
+# Test case 52
+Error: member status wrong casing (YES): This test case verifies that "YES" is rejected for --member due to case-sensitive matching.
+Input: `finecalc --type book --days-late 10 --member YES --lost no`
+Expected result: `Error: Invalid value for --member: "YES". Accepted values are: yes, no`
+
+---
+
+# Test case 53
+Error: member status wrong casing (No): This test case verifies that "No" (mixed case) is rejected for --member due to case-sensitive matching.
+Input: `finecalc --type book --days-late 10 --member No --lost no`
+Expected result: `Error: Invalid value for --member: "No". Accepted values are: yes, no`
+
+---
+
+# Test case 54
+Error: lost status invalid value: This test case verifies that an unrecognized value for --lost (e.g., "false") produces a descriptive error.
+Input: `finecalc --type book --days-late 10 --member no --lost false`
+Expected result: `Error: Invalid value for --lost: "false". Accepted values are: yes, no`
+
+---
+
+# Test case 55
+Error: lost status wrong casing (YES): This test case verifies that "YES" is rejected for --lost due to case-sensitive matching.
+Input: `finecalc --type book --days-late 10 --member no --lost YES`
+Expected result: `Error: Invalid value for --lost: "YES". Accepted values are: yes, no`
+
+---
+
+# Test case 56
+Error: lost status wrong casing (No): This test case verifies that "No" (mixed case) is rejected for --lost due to case-sensitive matching.
+Input: `finecalc --type book --days-late 10 --member no --lost No`
+Expected result: `Error: Invalid value for --lost: "No". Accepted values are: yes, no`
+
+---
+
+# Test case 57
+Decision table: book, below cap, non-member, not lost: This test case covers the decision branch where no cap, no discount, and no lost fee are applied to a book.
+Input: `finecalc --type book --days-late 5 --member no --lost no`
+Expected result: `Total fine: $2.50`
+
+---
+
+# Test case 58
+Decision table: book, at cap, member, not lost: This test case covers the branch where the book fine hits the cap and a member discount is applied, with no lost fee.
+Input: `finecalc --type book --days-late 40 --member yes --lost no`
+Expected result: `Total fine: $10.00`
+
+---
+
+# Test case 59
+Decision table: dvd, below cap, non-member, lost: This test case covers the decision branch for a DVD below the cap with a lost fee and no discount.
+Input: `finecalc --type dvd --days-late 5 --member no --lost yes`
+Expected result: `Total fine: $45.00`
+
+---
+
+# Test case 60
+Decision table: dvd, at cap, member, not lost: This test case covers the branch where the DVD fine hits the cap and a 50% discount is applied, with no lost fee.
+Input: `finecalc --type dvd --days-late 30 --member yes --lost no`
+Expected result: `Total fine: $15.00`
+
+---
+
+# Test case 61
+Decision table: book, below cap, member, lost: This test case verifies the full calculation chain — book below cap, member discount on overdue fine, then lost fee added without discount.
+Input: `finecalc --type book --days-late 20 --member yes --lost yes`
+Expected result: `Total fine: $30.00`
+
+---
+
+# Test case 62
+Decision table: dvd, at cap, member, lost: This test case verifies the full calculation chain — DVD at cap ($30.00), member discount produces $15.00, plus $40.00 lost fee totaling $55.00.
+Input: `finecalc --type dvd --days-late 30 --member yes --lost yes`
+Expected result: `Total fine: $55.00`
+
+---
+
+# Test case 63
+Output format: $0.00 is formatted with two decimal places: This test case verifies that a zero total fine (0 days late, no lost fee) is output as "$0.00" and not "$0".
+Input: `finecalc --type book --days-late 0 --member no --lost no`
+Expected result: `Total fine: $0.00`
+
+---
+
+# Test case 64
+Output format: member discount on odd fine still formats to two decimal places: This test case verifies that the 50% discount on an odd fine (e.g., $5.00 → $2.50) is formatted correctly to two decimal places.
+Input: `finecalc --type book --days-late 5 --member yes --lost no`
+Expected result: `Total fine: $1.25`
+
+---
+
+# Test case 65
+Error: days-late with leading plus sign: This test case verifies that "+10" (a non-standard integer representation) is rejected as an invalid days-late value.
+Input: `finecalc --type book --days-late +10 --member no --lost no`
+Expected result: `Error: Invalid value for --days-late: "+10". Value must be an integer between 0 and 365`

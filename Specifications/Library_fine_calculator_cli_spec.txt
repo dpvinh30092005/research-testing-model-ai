@@ -1,0 +1,212 @@
+# Library Fine Calculator CLI Specification
+
+## Application Name
+`finecalc`
+
+## Overview
+The command line application `finecalc` calculates the total library fine for a borrowed item based on item type, number of days late, membership status, and whether the item is lost.
+
+This is a stateless command line application. Each command invocation is evaluated independently and does not depend on previous invocations.
+
+## Command
+
+`finecalc --type <item_type> --days-late <days> --member <member_status> --lost <lost_status>`
+
+Arguments:
+- `--type <item_type>`: The borrowed item type.
+- `--days-late <days>`: The number of calendar days the item is overdue.
+- `--member <member_status>`: Whether the borrower has a library membership discount.
+- `--lost <lost_status>`: Whether the item is lost.
+
+## Accepted Values
+
+### Item Type
+Accepted values:
+- `book`
+- `dvd`
+
+Values are case-sensitive.
+
+### Days Late
+- Must be an integer.
+- Accepted range: `0` to `365`, inclusive.
+- Decimal values are invalid.
+- Negative values are invalid.
+
+### Member Status
+Accepted values:
+- `yes`
+- `no`
+
+Values are case-sensitive.
+
+### Lost Status
+Accepted values:
+- `yes`
+- `no`
+
+Values are case-sensitive.
+
+## Fine Calculation Rules
+
+### Base Overdue Fine
+If `--lost no`, calculate the overdue fine using the number of days late.
+
+If `--lost yes`, the overdue fine is still calculated using the number of days late, then the lost-item replacement fee is added.
+
+Rates:
+- `book`: `$0.50` per overdue day.
+- `dvd`: `$1.00` per overdue day.
+
+### Maximum Overdue Fine Cap
+Before applying the membership discount or lost-item replacement fee, the overdue fine is capped.
+
+Caps:
+- `book`: maximum overdue fine is `$20.00`.
+- `dvd`: maximum overdue fine is `$30.00`.
+
+### Membership Discount
+If `--member yes`, apply a `50%` discount to the capped overdue fine.
+
+Rules:
+- The discount applies only to the overdue fine.
+- The discount does not apply to the lost-item replacement fee.
+- If `--member no`, no discount is applied.
+
+### Lost-Item Replacement Fee
+If `--lost yes`, add the replacement fee after calculating the overdue fine and membership discount.
+
+Replacement fees:
+- `book`: `$25.00`
+- `dvd`: `$40.00`
+
+If `--lost no`, no replacement fee is added.
+
+### Total Fine
+The total fine is:
+
+`total = discounted_capped_overdue_fine + replacement_fee`
+
+The result must be output with exactly two decimal places.
+
+## Output Format
+
+Successful output:
+`Total fine: $<amount>`
+
+The amount must always contain exactly two digits after the decimal point.
+
+## Calculation Examples
+
+### Example 1: Book, 10 days late, non-member, not lost
+Input:
+`finecalc --type book --days-late 10 --member no --lost no`
+
+Calculation:
+- Overdue fine: `10 * $0.50 = $5.00`
+- Cap: `$5.00`, not capped
+- Member discount: none
+- Lost fee: none
+- Total: `$5.00`
+
+Output:
+`Total fine: $5.00`
+
+### Example 2: DVD, 40 days late, member, lost
+Input:
+`finecalc --type dvd --days-late 40 --member yes --lost yes`
+
+Calculation:
+- Overdue fine before cap: `40 * $1.00 = $40.00`
+- Cap: `$30.00`
+- Member discount: `$30.00 * 50% = $15.00`
+- Lost fee: `$40.00`
+- Total: `$55.00`
+
+Output:
+`Total fine: $55.00`
+
+### Example 3: Book, 0 days late, member, lost
+Input:
+`finecalc --type book --days-late 0 --member yes --lost yes`
+
+Calculation:
+- Overdue fine: `$0.00`
+- Member discount: `$0.00`
+- Lost fee: `$25.00`
+- Total: `$25.00`
+
+Output:
+`Total fine: $25.00`
+
+## Error Handling
+For invalid input, output an appropriate and descriptive error message.
+
+Invalid cases include:
+- Missing required option.
+- Unknown option.
+- Duplicate option.
+- Invalid item type.
+- Invalid days-late value.
+- Days-late below `0`.
+- Days-late above `365`.
+- Decimal days-late value.
+- Non-numeric days-late value.
+- Invalid member status.
+- Invalid lost status.
+- Case mismatch for enum values, such as `Book`, `YES`, or `False`.
+
+## Usage Examples
+
+```
+$ finecalc --type book --days-late 8 --member no --lost no
+Total fine: $4.00
+
+$ finecalc --type dvd --days-late 31 --member no --lost no
+Total fine: $30.00
+
+$ finecalc --type book --days-late 50 --member yes --lost yes
+Total fine: $35.00
+```
+
+## Test Category Set
+
+### Category 1: Fine Calculation Rules
+This category covers valid calculation behavior:
+- Book overdue fine.
+- DVD overdue fine.
+- Overdue fine caps.
+- Member discount.
+- Lost-item replacement fee.
+- Combined cap, discount, and lost-fee scenarios.
+- Output formatting with exactly two decimal places.
+
+### Category 2: CLI Input Validation
+This category covers invalid and boundary input:
+- Missing required options.
+- Unknown or duplicate options.
+- Invalid item type.
+- Invalid enum casing.
+- Invalid days-late format.
+- Days-late boundary values.
+- Values below or above the allowed days-late range.
+
+## Test Viewpoints
+
+1. Equivalence partitioning viewpoint:
+   Partition item type, member status, lost status, and days-late values into valid and invalid classes.
+
+2. Boundary value viewpoint:
+   Test days-late values `-1`, `0`, `1`, `39`, `40`, `60`, `365`, and `366`, considering the different cap points for books and DVDs.
+
+3. Decision table viewpoint:
+   Combine item type, membership status, lost status, and cap condition to verify all calculation branches.
+
+4. Output formatting viewpoint:
+   Verify that all successful outputs use currency format with exactly two decimal places.
+
+5. Error handling viewpoint:
+   Verify that invalid command syntax and invalid values produce descriptive error messages.
+
+6. Independence viewpoint:
+   Verify that each command invocation is stateless and unaffected by previous invocations.

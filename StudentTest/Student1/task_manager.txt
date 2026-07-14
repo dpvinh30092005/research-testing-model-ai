@@ -1,0 +1,190 @@
+1. Test case 1
+tasker add "Học Java" --due 2026-01-01 --priority high
+
+Verify that the output is Task added: #1 "Học Java" due 2026-01-01 priority high.
+
+
+
+2. Test case 2
+tasker add "Đi ngủ sớm" --due 2026-01-01
+
+Verify that the output is Task added: #1 "Đi ngủ sớm" due 2026-01-01 priority medium.
+
+
+
+3. Test case 3
+tasker add "Task 1" --due 2026-01-01
+tasker delete 1
+tasker add "Task 2" --due 2026-01-02
+
+Verify that the output is Task added: #2 "Task 2" due 2026-01-02 priority medium.
+
+
+
+4. Test case 4
+tasker add "   Code dạo dạo   " --due 2026-01-01
+
+Verify that the output is Task added: #1 "Code dạo dạo" due 2026-01-01 priority medium.
+
+
+
+5. Test case 5
+tasker add "123456789012345678901234567890123456789012345678901234567890123456789012345678901" --due 2026-01-01
+
+Verify that the output is Error: Invalid title.
+
+
+
+6. Test case 6
+tasker add "" --due 2026-01-01
+
+Verify that the output is Error: Invalid title.
+
+
+
+7. Test case 7
+tasker add "Task" --due 31-12-2026
+
+Verify that the output is Error: Invalid due date format.
+
+
+
+8. Test case 8
+tasker add "Nộp báo cáo" --due 2024-02-29
+
+Verify that the output is Task added: #1 "Nộp báo cáo" due 2024-02-29 priority medium.
+
+
+
+9. Test case 9
+tasker add "Nộp báo cáo" --due 2025-02-29
+
+Verify that the output is Error: Invalid calendar date.
+
+
+
+10. Test case 10
+tasker add "Quá khứ" --due 1999-12-31
+
+Verify that the output is Error: Due date year outside the accepted range.
+
+
+
+11. Test case 11
+tasker add "Học bài" --due 2026-01-01 --priority High
+
+Verify that the output is Error: Invalid priority.
+
+
+
+12. Test case 12
+tasker add "Học bài" --due 2026-01-01
+tasker update 1 --title "Học bài gấp" --due 2026-02-02 --priority high
+
+Verify that the output is Task updated: 1.
+
+
+
+13. Test case 13
+tasker add "Học bài" --due 2026-01-01
+tasker update 1
+
+
+
+Verify that the output is Error: Updating a task without providing any editable field.
+
+
+
+14. Test case 14
+tasker update 999 --title "Lỗi"
+
+Verify that the output is Error: ID not found.
+
+
+
+15. Test case 15
+tasker add "Học bài" --due 2026-01-01
+tasker complete 1
+
+Verify that the output is Task completed: 1.
+
+
+
+16. Test case 16
+tasker add "Học bài" --due 2026-01-01
+tasker complete 1
+tasker complete 1
+
+Verify that the output is Error: Trying to complete an already completed task.
+
+
+
+17. Test case 17
+tasker add "Học bài" --due 2026-01-01
+tasker complete 1
+tasker reopen 1
+
+Verify that the output is Task reopened: 1.
+
+
+
+18. Test case 18
+tasker add "Học bài" --due 2026-01-01
+tasker reopen 1
+
+Verify that the output is Error: Trying to reopen a task that is already todo.
+
+
+
+19. Test case 19
+tasker add "Task 1" --due 2026-01-01
+tasker add "Task 2" --due 2026-01-02
+tasker complete 2
+tasker list --status todo
+
+Verify that the output is
+
+1 [todo] Task 1 | due: 2026-01-01 | priority: medium
+Total: 1 task(s).
+
+
+
+20. Test case 20
+tasker list --status Todo
+Verify that the output is Error: Invalid status filter.
+
+
+
+21. Test case 21
+tasker add "Task 1" --due 2026-01-02
+tasker add "Task 2" --due 2026-01-01
+tasker list --sort due
+
+Verify that the output is
+
+2 [todo] Task 2 | due: 2026-01-01 | priority: medium
+1 [todo] Task 1 | due: 2026-01-02 | priority: medium
+Total: 2 task(s).
+
+
+
+22. Test case 22
+tasker add "Task 1" --due 2026-01-01
+tasker add "Task 2" --due 2026-01-02
+tasker complete 1
+tasker summary
+
+Verify that the output is
+
+Todo: 1
+Done: 1
+Total: 2
+
+
+
+23. Test case 23
+Thực hiện thêm liên tục 100 task từ lệnh add.
+
+tasker add "Task thứ 101" --due 2026-01-01
+
+Verify that the output is Error: Adding a task when the active task limit has been reached.

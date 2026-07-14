@@ -1,0 +1,45 @@
+Test case 46:
+Input: tasker add "Write report" --due 2026-07-01 --priority high
+Output: Task added: #1 "Write report" due 2026-07-01 priority high.
+Test case 47:
+Input: tasker add "Review slides" --due 2026-06-28
+Output: Task added: #2 "Review slides" due 2026-06-28 priority medium.
+Test case 48:
+Input: tasker add " A " --due 2026-07-01
+Output: Task added: #3 "A" due 2026-07-01 priority medium.
+Test case 49:
+Input: tasker add " " --due 2026-07-01
+Output: Error: Invalid title.
+Test case 50:
+Input: tasker add "Task" --due 01-07-2026
+Output: Error: Invalid due date format.
+Test case 51:
+Input: tasker add "Task" --due 2026-02-29
+Output: Error: Invalid calendar date.
+Test case 52:
+Input: tasker add "Task" --due 2024-02-29
+Output: Task added: #4 "Task" due 2024-02-29 priority medium.
+Test case 53:
+Input: tasker add "Task" --due 2100-01-01
+Output: Error: Due date year outside the accepted range.
+Test case 54:
+Input: tasker complete 1
+Output: Task completed: #1.
+Test case 55:
+Input: tasker complete 1 (when already completed)
+Output: Error: Trying to complete an already completed task.
+Test case 56:
+Input: tasker reopen 1
+Output: Task reopened: #1.
+Test case 57:
+Input: tasker delete 1
+Output: Task deleted: #1.
+Test case 58:
+Input: tasker add "Task" --due 2000-01-01
+Output: Task added: #5 "Task" due 2000-01-01 priority medium.
+Test case 59:
+Input: tasker add "Task" --due 2099-12-31
+Output: Task added: #6 "Task" due 2099-12-31 priority medium.
+Test case 60:
+Input: tasker update 2 --title "Updated Slides" --priority low
+Output: Task updated: #2.

@@ -1,0 +1,230 @@
+TEST CASE - TASKER (Task Manager CLI)
+Tong: 50 case
+Luu y: app la stateful, moi case bat dau tu trang thai rong (chua co task nao), cac lenh trong 1 case chay tuan tu
+
+--- CASE HOP LE ---
+
+1. Add task day du field
+   tasker add "Write report" --due 2026-07-01 --priority high
+   -> Task added: #1 "Write report" due 2026-07-01 priority high.
+
+2. Add task khong truyen priority -> mac dinh medium
+   tasker add "Review slides" --due 2026-06-28
+   -> Task added: #2 "Review slides" due 2026-06-28 priority medium.
+
+3. Add 3 task lien tiep, kiem tra id tang dan
+   tasker add "Task A" --due 2026-01-01
+   tasker add "Task B" --due 2026-01-02
+   tasker add "Task C" --due 2026-01-03
+   -> id lan luot la #1, #2, #3
+
+4. Add task priority low
+   tasker add "Buy groceries" --due 2026-05-10 --priority low
+   -> Task added: #1 "Buy groceries" due 2026-05-10 priority low.
+
+5. Add task title co dau cau dac biet duoc cho phep (: , . - ())
+   tasker add "Meeting: Q3 plan, (draft) - v2" --due 2026-08-01
+   -> Task added: #1 "Meeting: Q3 plan, (draft) - v2" due 2026-08-01 priority medium.
+
+6. Add task title dai dung 80 ky tu (bien tren cho phep)
+   tasker add "<chuoi 80 ky tu>" --due 2026-01-01
+   -> them thanh cong, khong bao loi
+
+7. Add task title co khoang trang dau/cuoi -> phai bi trim khi luu
+   tasker add "   Clean desk   " --due 2026-01-01
+   -> Task added: #1 "Clean desk" due 2026-01-01 priority medium.
+
+8. Complete 1 task dang todo
+   tasker add "X" --due 2026-01-01
+   tasker complete 1
+   -> Task completed: #1.
+
+9. Reopen task da done
+   tasker add "X" --due 2026-01-01
+   tasker complete 1
+   tasker reopen 1
+   -> Task reopened: #1.
+
+10. Delete 1 task
+    tasker add "X" --due 2026-01-01
+    tasker delete 1
+    -> Task deleted: #1.
+
+11. Update title cua task
+    tasker add "Old title" --due 2026-01-01
+    tasker update 1 --title "New title"
+    -> Task updated: #1.
+
+12. Update due date
+    tasker add "X" --due 2026-01-01
+    tasker update 1 --due 2026-09-09
+    -> Task updated: #1.
+
+13. Update priority
+    tasker add "X" --due 2026-01-01
+    tasker update 1 --priority low
+    -> Task updated: #1.
+
+14. Update nhieu field cung luc
+    tasker add "X" --due 2026-01-01
+    tasker update 1 --title "Y" --due 2026-02-02 --priority high
+    -> Task updated: #1.
+
+15. Update mot task da complete - van phai cho sua (theo spec)
+    tasker add "X" --due 2026-01-01
+    tasker complete 1
+    tasker update 1 --title "Y"
+    -> Task updated: #1.
+
+16. List khi chua co task nao
+    tasker list
+    -> No tasks found.
+
+17. List mac dinh (khong truyen status/sort) - phai sort theo created
+    tasker add "A" --due 2026-01-05
+    tasker add "B" --due 2026-01-01
+    tasker list
+    -> #1 hien truoc #2 (dung theo thu tu tao, khong phai theo due)
+
+18. List loc status todo
+    tasker add "A" --due 2026-01-01
+    tasker add "B" --due 2026-01-02
+    tasker complete 1
+    tasker list --status todo
+    -> chi con #2 xuat hien
+
+19. List loc status done
+    tasker add "A" --due 2026-01-01
+    tasker add "B" --due 2026-01-02
+    tasker complete 1
+    tasker list --status done
+    -> chi con #1 xuat hien
+
+20. List sort theo due (giong vi du trong spec)
+    tasker add "Write report" --due 2026-07-01 --priority high
+    tasker add "Review slides" --due 2026-06-28
+    tasker complete 1
+    tasker list --status all --sort due
+    -> #2 hien truoc #1 vi due som hon
+
+21. List sort theo priority
+    tasker add "A" --due 2026-01-01 --priority low
+    tasker add "B" --due 2026-01-01 --priority high
+    tasker add "C" --due 2026-01-01 --priority medium
+    tasker list --sort priority
+    -> thu tu phai la #2 (high), #3 (medium), #1 (low)
+
+22. Summary co ban - giong vi du trong spec
+    tasker add "Write report" --due 2026-07-01 --priority high
+    tasker add "Review slides" --due 2026-06-28
+    tasker complete 1
+    tasker summary
+    -> Todo: 1
+       Done: 1
+       Total: 2
+
+23. Summary khi chua tao task nao
+    tasker summary
+    -> Todo: 0
+       Done: 0
+       Total: 0
+
+24. Xoa task xong list lai -> khong duoc thay task da xoa
+    tasker add "X" --due 2026-01-01
+    tasker delete 1
+    tasker list
+    -> No tasks found.
+
+25. Xoa task #1 roi add task moi -> id moi khong duoc trung id da xoa
+    tasker add "A" --due 2026-01-01
+    tasker delete 1
+    tasker add "B" --due 2026-01-01
+    -> task B phai nhan id #2, khong duoc la #1
+
+26. Due date la ngay nhuan hop le (29/2/2024)
+    tasker add "Leap test" --due 2024-02-29
+    -> them thanh cong
+
+27. Due date nam bien duoi cho phep (2000)
+    tasker add "Old date" --due 2000-01-01
+    -> them thanh cong
+
+28. Due date nam bien tren cho phep (2099)
+    tasker add "Future date" --due 2099-12-31
+    -> them thanh cong
+
+29. Them du 100 task active roi them task thu 101
+    (them lien tuc 100 task hop le, sau do)
+    tasker add "Task 101" --due 2026-01-01
+    -> loi, vuot gioi han 100 task active
+
+30. Dang co 100 task active, xoa 1 task roi add lai -> phai duoc
+    (100 task active, xoa #1, sau do)
+    tasker add "New task" --due 2026-01-01
+    -> them thanh cong vi slot da trong ra
+
+--- CASE LOI / KHONG HOP LE ---
+
+31. Add thieu --due
+    tasker add "No due date"
+    -> loi, thieu tham so bat buoc --due
+
+32. Add voi title rong
+    tasker add "" --due 2026-01-01
+    -> loi title khong hop le
+
+33. Add voi title toan khoang trang
+    tasker add "     " --due 2026-01-01
+    -> loi (sau khi trim thi rong)
+
+34. Add voi title dai hon 80 ky tu
+    tasker add "<chuoi 81 ky tu>" --due 2026-01-01
+    -> loi title qua dai
+
+35. Add voi title chua ky tu khong duoc phep (vd @ # ! /)
+    tasker add "Task @#!" --due 2026-01-01
+    -> loi ky tu khong hop le
+
+36. Add voi due date sai dinh dang (vd DD-MM-YYYY)
+    tasker add "Bad date" --due 07-01-2026
+    -> loi sai dinh dang ngay
+
+37. Add voi due date khong ton tai tren lich (vd 30/2)
+    tasker add "Invalid cal date" --due 2026-02-30
+    -> loi ngay khong hop le
+
+38. Add voi due date 29/2 cua nam khong nhuan
+    tasker add "Non leap" --due 2001-02-29
+    -> loi vi 2001 khong phai nam nhuan
+
+39. Add voi due date nam ngoai khoang cho phep (vd 1999 hoac 2100)
+    tasker add "Out of range" --due 1999-12-31
+    -> loi nam ngoai khoang 2000-2099
+
+40. Add voi priority sai chu hoa/thuong (vd High)
+    tasker add "Case test" --due 2026-01-01 --priority High
+    -> loi vi phan biet hoa thuong
+
+41. Add voi priority khong ton tai (vd urgent)
+    tasker add "Bad priority" --due 2026-01-01 --priority urgent
+    -> loi priority khong hop le
+
+42. Update ma khong truyen field nao ca
+    tasker add "X" --due 2026-01-01
+    tasker update 1
+    -> loi, phai co it nhat 1 field de sua
+
+43. Update mot id khong ton tai
+    tasker update 99 --title "X"
+    -> loi khong tim thay task
+
+44. Complete mot task da o trang thai done roi (complete 2 lan)
+    tasker add "X" --due 2026-01-01
+    tasker complete 1
+    tasker complete 1
+    -> loi, task da hoan thanh roi
+
+45. Reopen mot task dang o trang thai todo (chua complete lan nao)
+    tasker add "X" --due 2026-01-01
+    tasker reopen 1
+    -> loi, chi reopen duoc task dang done

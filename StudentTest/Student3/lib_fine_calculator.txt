@@ -1,0 +1,45 @@
+Test case 16:
+Input: finecalc --type book --days-late 10 --member no --lost no
+Output: Total fine: $5.00
+Test case 17:
+Input: finecalc --type dvd --days-late 40 --member yes --lost yes
+Output: Total fine: $55.00
+Test case 18:
+Input: finecalc --type book --days-late 0 --member yes --lost yes
+Output: Total fine: $25.00
+Test case 19:
+Input: finecalc --type Book --days-late 10 --member no --lost no
+Output: Error: Invalid item type.
+Test case 20:
+Input: finecalc --type book --days-late -5 --member no --lost no
+Output: Error: Days-late below 0.
+Test case 21:
+Input: finecalc --type book --days-late 366 --member no --lost no
+Output: Error: Days-late above 365.
+Test case 22:
+Input: finecalc --type book --days-late 5.5 --member no --lost no
+Output: Error: Decimal days-late value.
+Test case 23:
+Input: finecalc --days-late 10 --member no --lost no
+Output: Error: Missing required option.
+Test case 24:
+Input: finecalc --type book --type dvd --days-late 10 --member no --lost no
+Output: Error: Duplicate option.
+Test case 25:
+Input: finecalc --type dvd --days-late 31 --member no --lost no
+Output: Total fine: $30.00
+Test case 26:
+Input: finecalc --type book --days-late 40 --member no --lost no
+Output: Total fine: $20.00
+Test case 27:
+Input: finecalc --type book --days-late 50 --member yes --lost no
+Output: Total fine: $10.00
+Test case 28:
+Input: finecalc --type dvd --days-late 30 --member no --lost no
+Output: Total fine: $30.00
+Test case 29:
+Input: finecalc --type dvd --days-late 30 --member yes --lost no
+Output: Total fine: $15.00
+Test case 30:
+Input: finecalc --type book --days-late 10 --member no --lost yes
+Output: Total fine: $30.00

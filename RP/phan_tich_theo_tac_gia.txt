@@ -1,0 +1,83 @@
+====================================================================================================
+AUTHOR-STYLE TABLE 2 — REPRODUCED apps (Kirinuki human baseline) — compare directly to their Table 2
+(covered EFFECTIVE viewpoints; X+ = union of human X with ChatGPT (author's collaboration construct))
+====================================================================================================
+
+### Password strength checker
+  effective viewpoints: Basic=13  Extracted=11  All=24
+  type        GPT-5.5Sonnet 4.6Gemini 3.1  ChatGPT        A        B        C        D       A+       B+       C+       D+
+  Basic            12       12       13       10       10       12       10       10       12       12       11       13
+  Extracted        10        9       10        9        5        8        9       10       10       10       11       11
+  All              22       21       23       19       15       20       19       20       22       22       22       24
+
+### Unit converter
+  effective viewpoints: Basic=2  Extracted=21  All=23
+  type        GPT-5.5Sonnet 4.6Gemini 3.1  ChatGPT        A        B        C        D       A+       B+       C+       D+
+  Basic             2        2        2        2        2        2        2        2        2        2        2        2
+  Extracted        21       19       18       17       13       16       16       16       20       18       20       21
+  All              23       21       20       19       15       18       18       18       22       20       22       23
+
+### Budget planner
+  effective viewpoints: Basic=7  Extracted=23  All=30
+  type        GPT-5.5Sonnet 4.6Gemini 3.1  ChatGPT        A        B        C        D       A+       B+       C+       D+
+  Basic             7        7        7        6        7        6        7        7        7        6        7        7
+  Extracted        20       22       19       17       17       16       15       20       22       19       21       21
+  All              27       29       26       23       24       22       22       27       29       25       28       28
+
+----------------------------------------------------------------------------------------------------
+TOTAL over effective viewpoints (All):
+  GPT-5.5                 72/77    93.5%
+  Sonnet 4.6              71/77    92.2%
+  Gemini 3.1              69/77    89.6%
+  ChatGPT                 61/77    79.2%
+  Human A           54/77    70.1%     +ChatGPT:  73/77   94.8%
+  Human B           60/77    77.9%     +ChatGPT:  67/77   87.0%
+  Human C           59/77    76.6%     +ChatGPT:  72/77   93.5%
+  Human D           65/77    84.4%     +ChatGPT:  75/77   97.4%
+----------------------------------------------------------------------------------------------------
+  ChatGPT (partner = GPT-4)    61/77    79.2%
+  Human avg.                               77.3%
+  Human + ChatGPT avg.                     93.2%   <-- author's key synergy number
+  AI union (all models)        77/77   100.0%
+  Human union                  77/77   100.0%
+  Human + AI union combined    77/77   100.0%
+====================================================================================================
+AUTHOR-STYLE TABLE 2 — NEW apps (3 students, written WITHOUT AI) — our extension
+(covered EFFECTIVE viewpoints; no fixed AI partner in this cohort -> synergy reported as Human+AI union only)
+====================================================================================================
+
+### Library fine calculator
+  effective viewpoints: Basic=0  Extracted=22  All=22
+  type      Sonnet 4.6Gemini 3.1ChatGPT-5.5        A        B        C
+  Basic             0        0        0        0        0        0
+  Extracted        22       22       22       16       19       12
+  All              22       22       22       16       19       12
+
+### Task manager
+  effective viewpoints: Basic=0  Extracted=23  All=23
+  type      Sonnet 4.6Gemini 3.1ChatGPT-5.5        A        B        C
+  Basic             0        0        0        0        0        0
+  Extracted        19       19       21       17       18        5
+  All              19       19       21       17       18        5
+
+----------------------------------------------------------------------------------------------------
+TOTAL over effective viewpoints (All):
+  Sonnet 4.6              41/45    91.1%
+  Gemini 3.1              41/45    91.1%
+  ChatGPT-5.5             43/45    95.6%
+  Human A           33/45    73.3%
+  Human B           37/45    82.2%
+  Human C           17/45    37.8%
+----------------------------------------------------------------------------------------------------
+  Human avg.                               64.4%
+  AI union (all models)        43/45    95.6%
+  Human union                  44/45    97.8%
+  Human + AI union combined    45/45   100.0%
+
+====================================================================================================
+MANUAL TEST-DESIGN TIME (minutes) — author reported avg 198 min for 3 apps
+             |          A |          B |          C |          D |       Avg.
+  Password strength checker |         65 |         25 |         69 |         82 |      60.25
+  Unit converter |         37 |         68 |         41 |        107 |      63.25
+  Budget planner |         88 |         65 |         33 |        111 |      74.25
+       Total |        190 |        158 |        143 |        300 |     197.75

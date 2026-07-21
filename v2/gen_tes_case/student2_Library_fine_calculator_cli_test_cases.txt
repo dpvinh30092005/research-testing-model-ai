@@ -1,0 +1,180 @@
+TEST CASE - FINECALC (Library Fine Calculator)
+Note: test theo spec Library_fine_calculator_cli_spec.txt
+
+--- CASE HOP LE ---
+
+1. Book, 10 ngay tre, khong member, khong mat
+   finecalc --type book --days-late 10 --member no --lost no
+   -> Total fine: $5.00
+
+2. DVD, 40 ngay tre, member, mat dia
+   finecalc --type dvd --days-late 40 --member yes --lost yes
+   -> Total fine: $55.00
+
+3. Book, 0 ngay tre, member, mat sach
+   finecalc --type book --days-late 0 --member yes --lost yes
+   -> Total fine: $25.00
+
+4. Book, 8 ngay tre, khong member, khong mat
+   finecalc --type book --days-late 8 --member no --lost no
+   -> Total fine: $4.00
+
+5. DVD 31 ngay tre, khong member, khong mat - test cap
+   finecalc --type dvd --days-late 31 --member no --lost no
+   -> Total fine: $30.00 (31*1=31 nhung cap la 30)
+
+6. Book 50 ngay, member, mat sach
+   finecalc --type book --days-late 50 --member yes --lost yes
+   -> Total fine: $35.00
+
+7. Book 0 ngay, khong member, khong mat -> phai ra 0
+   finecalc --type book --days-late 0 --member no --lost no
+   -> Total fine: $0.00
+
+8. DVD 0 ngay, khong member, khong mat
+   finecalc --type dvd --days-late 0 --member no --lost no
+   -> Total fine: $0.00
+
+9. Book 365 ngay (max), khong member, khong mat
+   finecalc --type book --days-late 365 --member no --lost no
+   -> Total fine: $20.00 (365*0.5=182.5 nhung bi cap $20)
+
+10. DVD 365 ngay (max), khong member, khong mat
+    finecalc --type dvd --days-late 365 --member no --lost no
+    -> Total fine: $30.00
+
+11. Book dung 40 ngay - ngay vua cham cap
+    finecalc --type book --days-late 40 --member no --lost no
+    -> Total fine: $20.00 (40*0.5 = 20 dung boi)
+
+12. Book 41 ngay - vua qua cap 1 chut
+    finecalc --type book --days-late 41 --member no --lost no
+    -> Total fine: $20.00
+
+13. DVD dung 30 ngay - dung cap
+    finecalc --type dvd --days-late 30 --member no --lost no
+    -> Total fine: $30.00
+
+14. DVD 29 ngay - chua toi cap
+    finecalc --type dvd --days-late 29 --member no --lost no
+    -> Total fine: $29.00
+
+15. Book 20 ngay, member, khong mat
+    finecalc --type book --days-late 20 --member yes --lost no
+    -> Total fine: $5.00 (20*0.5=10, giam nua con 5)
+
+16. DVD 20 ngay, member, khong mat
+    finecalc --type dvd --days-late 20 --member yes --lost no
+    -> Total fine: $10.00
+
+17. Book 10 ngay, khong member, co mat
+    finecalc --type book --days-late 10 --member no --lost yes
+    -> Total fine: $30.00 (5 tien tre + 25 tien den)
+
+18. DVD 10 ngay, khong member, co mat
+    finecalc --type dvd --days-late 10 --member no --lost yes
+    -> Total fine: $50.00
+
+19. Book 40 ngay, member, khong mat - vua cap vua giam gia
+    finecalc --type book --days-late 40 --member yes --lost no
+    -> Total fine: $10.00
+
+20. DVD 50 ngay, member, khong mat
+    finecalc --type dvd --days-late 50 --member yes --lost no
+    -> Total fine: $15.00 (cap 30 roi giam nua)
+
+21. DVD 0 ngay, member, co mat -> chi tinh tien den thoi
+    finecalc --type dvd --days-late 0 --member yes --lost yes
+    -> Total fine: $40.00
+
+22. Book 1 ngay tre - so nho nhat khac 0
+    finecalc --type book --days-late 1 --member no --lost no
+    -> Total fine: $0.50
+
+23. DVD 1 ngay, member, khong mat
+    finecalc --type dvd --days-late 1 --member yes --lost no
+    -> Total fine: $0.50
+
+24. DVD 365 ngay, member, co mat - ket hop nhieu dieu kien cung luc
+    finecalc --type dvd --days-late 365 --member yes --lost yes
+    -> Total fine: $55.00
+
+25. DVD 30 ngay (dung cap), khong member, co mat
+    finecalc --type dvd --days-late 30 --member no --lost yes
+    -> Total fine: $70.00 (30 tien cap + 40 tien den)
+
+26. Book 5 ngay, member, khong mat - so le
+    finecalc --type book --days-late 5 --member yes --lost no
+    -> Total fine: $1.25
+
+27. DVD 1 ngay, khong member, khong mat
+    finecalc --type dvd --days-late 1 --member no --lost no
+    -> Total fine: $1.00
+
+28. Book 365 ngay, khong member, co mat
+    finecalc --type book --days-late 365 --member no --lost yes
+    -> Total fine: $45.00 (cap 20 + den 25)
+
+29. Doi thu tu tham so xem parser co bi loi khong
+    finecalc --lost no --member no --days-late 10 --type book
+    -> Total fine: $5.00 (phai giong y het case 1 du doi cho tham so)
+
+--- CASE LOI / KHONG HOP LE ---
+
+30. days-late qua 365 -> phai bao loi
+    finecalc --type book --days-late 366 --member no --lost no
+    -> loi, khong duoc chap nhan (ngoai range 0-365)
+
+31. days-late am
+    finecalc --type book --days-late -1 --member no --lost no
+    -> loi, khong cho phep so am
+
+32. days-late la so thap phan
+    finecalc --type book --days-late 10.5 --member no --lost no
+    -> loi, phai la so nguyen
+
+33. days-late khong phai so (chu)
+    finecalc --type book --days-late abc --member no --lost no
+    -> loi
+
+34. type viet hoa chu B - "Book" thay vi "book"
+    finecalc --type Book --days-late 10 --member no --lost no
+    -> loi vi phan biet hoa thuong
+
+35. type sai, khong ton tai (vd cd)
+    finecalc --type cd --days-late 10 --member no --lost no
+    -> loi, chi nhan book/dvd thoi
+
+36. member viet hoa "Yes"
+    finecalc --type book --days-late 10 --member Yes --lost no
+    -> loi
+
+37. member gia tri linh tinh "maybe"
+    finecalc --type book --days-late 10 --member maybe --lost no
+    -> loi
+
+38. lost viet hoa het "YES"
+    finecalc --type book --days-late 10 --member no --lost YES
+    -> loi
+
+39. lost gia tri sai "False" (phai la no)
+    finecalc --type book --days-late 10 --member no --lost False
+    -> loi
+
+40. thieu --type
+    finecalc --days-late 10 --member no --lost no
+    -> loi thieu tham so bat buoc
+
+41. thieu --days-late
+    finecalc --type book --member no --lost no
+    -> loi thieu tham so
+
+42. thieu --member
+    finecalc --type book --days-late 10 --lost no
+    -> loi thieu tham so
+
+43. thieu --lost
+    finecalc --type book --days-late 10 --member no
+    -> loi thieu tham so
+
+

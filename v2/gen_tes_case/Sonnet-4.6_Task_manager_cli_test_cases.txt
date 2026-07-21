@@ -1,0 +1,605 @@
+# Test case 1
+Add single task with all fields: This test case verifies that adding a task with a title, due date, and explicit priority produces the correct confirmation output.
+Test Steps:
+- `tasker add "Write report" --due 2026-07-01 --priority high`
+- Verify that the output is `Task added: #1 "Write report" due 2026-07-01 priority high.`
+
+---
+
+# Test case 2
+Add task with default priority: This test case verifies that omitting `--priority` defaults to `medium`.
+Test Steps:
+- `tasker add "Review slides" --due 2026-06-28`
+- Verify that the output is `Task added: #1 "Review slides" due 2026-06-28 priority medium.`
+
+---
+
+# Test case 3
+Add multiple tasks and verify auto-incrementing IDs: This test case verifies that task IDs are assigned sequentially starting from 1.
+Test Steps:
+- `tasker add "Task A" --due 2026-07-01 --priority low`
+- `tasker add "Task B" --due 2026-07-02 --priority medium`
+- `tasker add "Task C" --due 2026-07-03 --priority high`
+- Verify that the output is `Task added: #3 "Task C" due 2026-07-03 priority high.`
+
+---
+
+# Test case 4
+Complete a todo task: This test case verifies that a `todo` task can be marked as `done`.
+Test Steps:
+- `tasker add "Fix bug" --due 2026-07-01 --priority high`
+- `tasker complete 1`
+- Verify that the output is `Task completed: #1.`
+
+---
+
+# Test case 5
+Reopen a done task: This test case verifies that a `done` task can be changed back to `todo`.
+Test Steps:
+- `tasker add "Fix bug" --due 2026-07-01 --priority high`
+- `tasker complete 1`
+- `tasker reopen 1`
+- Verify that the output is `Task reopened: #1.`
+
+---
+
+# Test case 6
+Delete a todo task: This test case verifies that a `todo` task can be deleted and the confirmation message is correct.
+Test Steps:
+- `tasker add "Temporary task" --due 2026-07-01`
+- `tasker delete 1`
+- Verify that the output is `Task deleted: #1.`
+
+---
+
+# Test case 7
+Delete a done task: This test case verifies that a `done` task can also be deleted.
+Test Steps:
+- `tasker add "Done task" --due 2026-07-01`
+- `tasker complete 1`
+- `tasker delete 1`
+- Verify that the output is `Task deleted: #1.`
+
+---
+
+# Test case 8
+Deleted task does not appear in list: This test case verifies that a deleted task is excluded from `list` output.
+Test Steps:
+- `tasker add "Keep me" --due 2026-07-01`
+- `tasker add "Delete me" --due 2026-07-02`
+- `tasker delete 2`
+- `tasker list`
+- Verify that the output is:
+```
+1. #1 [todo] Keep me | due: 2026-07-01 | priority: medium
+Total: 1 task(s)
+```
+
+---
+
+# Test case 9
+Deleted task IDs are not reused: This test case verifies that after deleting task #1, a new task receives ID #3 (not #1).
+Test Steps:
+- `tasker add "Task One" --due 2026-07-01`
+- `tasker add "Task Two" --due 2026-07-02`
+- `tasker delete 1`
+- `tasker add "Task Three" --due 2026-07-03`
+- Verify that the output is `Task added: #3 "Task Three" due 2026-07-03 priority medium.`
+
+---
+
+# Test case 10
+Update task title: This test case verifies that a task title can be updated using `--title`.
+Test Steps:
+- `tasker add "Old title" --due 2026-07-01`
+- `tasker update 1 --title "New title"`
+- Verify that the output is `Task updated: #1.`
+
+---
+
+# Test case 11
+Update task due date: This test case verifies that a task due date can be updated using `--due`.
+Test Steps:
+- `tasker add "Some task" --due 2026-07-01`
+- `tasker update 1 --due 2026-08-15`
+- Verify that the output is `Task updated: #1.`
+
+---
+
+# Test case 12
+Update task priority: This test case verifies that a task priority can be updated using `--priority`.
+Test Steps:
+- `tasker add "Some task" --due 2026-07-01 --priority low`
+- `tasker update 1 --priority high`
+- Verify that the output is `Task updated: #1.`
+
+---
+
+# Test case 13
+Update multiple fields at once: This test case verifies that title, due date, and priority can all be updated in a single command.
+Test Steps:
+- `tasker add "Old title" --due 2026-07-01 --priority low`
+- `tasker update 1 --title "New title" --due 2026-09-01 --priority high`
+- Verify that the output is `Task updated: #1.`
+
+---
+
+# Test case 14
+Update a completed task: This test case verifies that a `done` task can still be updated.
+Test Steps:
+- `tasker add "Finished work" --due 2026-07-01`
+- `tasker complete 1`
+- `tasker update 1 --title "Finished work v2"`
+- Verify that the output is `Task updated: #1.`
+
+---
+
+# Test case 15
+Updated fields are reflected in list output: This test case verifies that the `list` command shows updated values after an `update` command.
+Test Steps:
+- `tasker add "Old title" --due 2026-07-01 --priority low`
+- `tasker update 1 --title "New title" --due 2026-08-01 --priority high`
+- `tasker list`
+- Verify that the output is:
+```
+1. #1 [todo] New title | due: 2026-08-01 | priority: high
+Total: 1 task(s)
+```
+
+---
+
+# Test case 16
+List all tasks with default options: This test case verifies that `tasker list` without options shows all tasks sorted by created order.
+Test Steps:
+- `tasker add "Alpha" --due 2026-07-03 --priority low`
+- `tasker add "Beta" --due 2026-07-01 --priority high`
+- `tasker complete 1`
+- `tasker list`
+- Verify that the output is:
+```
+1. #1 [done] Alpha | due: 2026-07-03 | priority: low
+2. #2 [todo] Beta | due: 2026-07-01 | priority: high
+Total: 2 task(s)
+```
+
+---
+
+# Test case 17
+List tasks filtered by status todo: This test case verifies that `--status todo` shows only `todo` tasks.
+Test Steps:
+- `tasker add "Task A" --due 2026-07-01`
+- `tasker add "Task B" --due 2026-07-02`
+- `tasker complete 1`
+- `tasker list --status todo`
+- Verify that the output is:
+```
+1. #2 [todo] Task B | due: 2026-07-02 | priority: medium
+Total: 1 task(s)
+```
+
+---
+
+# Test case 18
+List tasks filtered by status done: This test case verifies that `--status done` shows only `done` tasks.
+Test Steps:
+- `tasker add "Task A" --due 2026-07-01`
+- `tasker add "Task B" --due 2026-07-02`
+- `tasker complete 1`
+- `tasker list --status done`
+- Verify that the output is:
+```
+1. #1 [done] Task A | due: 2026-07-01 | priority: medium
+Total: 1 task(s)
+```
+
+---
+
+# Test case 19
+List with no matching tasks returns "No tasks found": This test case verifies that filtering by `done` when no tasks are completed returns the empty message.
+Test Steps:
+- `tasker add "Task A" --due 2026-07-01`
+- `tasker list --status done`
+- Verify that the output is `No tasks found.`
+
+---
+
+# Test case 20
+List sorted by due date: This test case verifies that `--sort due` orders tasks ascending by due date, with equal due dates broken by ID.
+Test Steps:
+- `tasker add "Far future" --due 2026-09-01`
+- `tasker add "Near future" --due 2026-07-01`
+- `tasker add "Same day" --due 2026-07-01`
+- `tasker list --sort due`
+- Verify that the output is:
+```
+1. #2 [todo] Near future | due: 2026-07-01 | priority: medium
+2. #3 [todo] Same day | due: 2026-07-01 | priority: medium
+3. #1 [todo] Far future | due: 2026-09-01 | priority: medium
+Total: 3 task(s)
+```
+
+---
+
+# Test case 21
+List sorted by priority: This test case verifies that `--sort priority` orders tasks high → medium → low, with ties broken by ID.
+Test Steps:
+- `tasker add "Low prio" --due 2026-07-01 --priority low`
+- `tasker add "High prio" --due 2026-07-02 --priority high`
+- `tasker add "Med prio" --due 2026-07-03 --priority medium`
+- `tasker add "High prio 2" --due 2026-07-04 --priority high`
+- `tasker list --sort priority`
+- Verify that the output is:
+```
+1. #2 [todo] High prio | due: 2026-07-02 | priority: high
+2. #4 [todo] High prio 2 | due: 2026-07-04 | priority: high
+3. #3 [todo] Med prio | due: 2026-07-03 | priority: medium
+4. #1 [todo] Low prio | due: 2026-07-01 | priority: low
+Total: 4 task(s)
+```
+
+---
+
+# Test case 22
+Summary with mixed statuses: This test case verifies that `summary` correctly counts todo and done tasks.
+Test Steps:
+- `tasker add "Task A" --due 2026-07-01`
+- `tasker add "Task B" --due 2026-07-02`
+- `tasker add "Task C" --due 2026-07-03`
+- `tasker complete 1`
+- `tasker complete 2`
+- `tasker summary`
+- Verify that the output is:
+```
+Todo: 1
+Done: 2
+Total: 3
+```
+
+---
+
+# Test case 23
+Summary after delete: This test case verifies that deleted tasks are excluded from `summary` counts.
+Test Steps:
+- `tasker add "Task A" --due 2026-07-01`
+- `tasker add "Task B" --due 2026-07-02`
+- `tasker complete 1`
+- `tasker delete 1`
+- `tasker summary`
+- Verify that the output is:
+```
+Todo: 1
+Done: 0
+Total: 1
+```
+
+---
+
+# Test case 24
+Summary with no tasks: This test case verifies that `summary` shows all-zero counts when no tasks exist.
+Test Steps:
+- `tasker summary`
+- Verify that the output is:
+```
+Todo: 0
+Done: 0
+Total: 0
+```
+
+---
+
+# Test case 25
+Complete an already completed task is invalid: This test case verifies that attempting to complete a `done` task produces an error.
+Test Steps:
+- `tasker add "Task A" --due 2026-07-01`
+- `tasker complete 1`
+- `tasker complete 1`
+- Verify that the output is an error message such as `Error: Task #1 is already completed.`
+
+---
+
+# Test case 26
+Reopen a todo task is invalid: This test case verifies that attempting to reopen a `todo` task produces an error.
+Test Steps:
+- `tasker add "Task A" --due 2026-07-01`
+- `tasker reopen 1`
+- Verify that the output is an error message such as `Error: Task #1 is already open (status: todo).`
+
+---
+
+# Test case 27
+Complete a non-existent task ID: This test case verifies that completing a task with an unknown ID produces an error.
+Test Steps:
+- `tasker complete 99`
+- Verify that the output is an error message such as `Error: Task #99 not found.`
+
+---
+
+# Test case 28
+Update a non-existent task ID: This test case verifies that updating an unknown task ID produces an error.
+Test Steps:
+- `tasker update 99 --title "Ghost"`
+- Verify that the output is an error message such as `Error: Task #99 not found.`
+
+---
+
+# Test case 29
+Delete a non-existent task ID: This test case verifies that deleting an unknown task ID produces an error.
+Test Steps:
+- `tasker delete 99`
+- Verify that the output is an error message such as `Error: Task #99 not found.`
+
+---
+
+# Test case 30
+Complete a deleted task ID: This test case verifies that a deleted task's ID is treated as not found.
+Test Steps:
+- `tasker add "Task A" --due 2026-07-01`
+- `tasker delete 1`
+- `tasker complete 1`
+- Verify that the output is an error message such as `Error: Task #1 not found.`
+
+---
+
+# Test case 31
+Update without providing any field is invalid: This test case verifies that calling `update` without `--title`, `--due`, or `--priority` produces an error.
+Test Steps:
+- `tasker add "Task A" --due 2026-07-01`
+- `tasker update 1`
+- Verify that the output is an error message such as `Error: At least one of --title, --due, or --priority must be provided.`
+
+---
+
+# Test case 32
+Add task with title at maximum length (80 chars): This test case verifies that a title of exactly 80 characters is accepted.
+Test Steps:
+- `tasker add "A234567890123456789012345678901234567890123456789012345678901234567890123456789B" --due 2026-07-01`
+- Verify that the output is `Task added: #1 "A234567890123456789012345678901234567890123456789012345678901234567890123456789B" due 2026-07-01 priority medium.`
+
+---
+
+# Test case 33
+Add task with title of 1 character: This test case verifies that a single-character title (minimum length) is accepted.
+Test Steps:
+- `tasker add "X" --due 2026-07-01`
+- Verify that the output is `Task added: #1 "X" due 2026-07-01 priority medium.`
+
+---
+
+# Test case 34
+Add task with blank title is invalid: This test case verifies that an empty or whitespace-only title is rejected.
+Test Steps:
+- `tasker add "   " --due 2026-07-01`
+- Verify that the output is an error message such as `Error: Title must not be blank.`
+
+---
+
+# Test case 35
+Add task with title exceeding 80 characters is invalid: This test case verifies that a title of 81 characters is rejected.
+Test Steps:
+- `tasker add "A2345678901234567890123456789012345678901234567890123456789012345678901234567890X" --due 2026-07-01`
+- Verify that the output is an error message such as `Error: Title must be between 1 and 80 characters.`
+
+---
+
+# Test case 36
+Add task with invalid title characters: This test case verifies that a title containing a disallowed character (e.g. `!`) is rejected.
+Test Steps:
+- `tasker add "Invalid! Title" --due 2026-07-01`
+- Verify that the output is an error message such as `Error: Title contains invalid characters.`
+
+---
+
+# Test case 37
+Add task with invalid date format: This test case verifies that a date not matching `YYYY-MM-DD` is rejected.
+Test Steps:
+- `tasker add "Task A" --due 07-01-2026`
+- Verify that the output is an error message such as `Error: Invalid due date format. Expected YYYY-MM-DD.`
+
+---
+
+# Test case 38
+Add task with invalid calendar date: This test case verifies that a syntactically formatted but impossible date (e.g. February 30) is rejected.
+Test Steps:
+- `tasker add "Task A" --due 2026-02-30`
+- Verify that the output is an error message such as `Error: Invalid calendar date: 2026-02-30.`
+
+---
+
+# Test case 39
+Add task with due date year below minimum (1999): This test case verifies that a year before 2000 is rejected.
+Test Steps:
+- `tasker add "Task A" --due 1999-12-31`
+- Verify that the output is an error message such as `Error: Due date year must be between 2000 and 2099.`
+
+---
+
+# Test case 40
+Add task with due date year at minimum boundary (2000): This test case verifies that year 2000 is accepted.
+Test Steps:
+- `tasker add "Task A" --due 2000-01-01`
+- Verify that the output is `Task added: #1 "Task A" due 2000-01-01 priority medium.`
+
+---
+
+# Test case 41
+Add task with due date year at maximum boundary (2099): This test case verifies that year 2099 is accepted.
+Test Steps:
+- `tasker add "Task A" --due 2099-12-31`
+- Verify that the output is `Task added: #1 "Task A" due 2099-12-31 priority medium.`
+
+---
+
+# Test case 42
+Add task with due date year above maximum (2100): This test case verifies that year 2100 is rejected.
+Test Steps:
+- `tasker add "Task A" --due 2100-01-01`
+- Verify that the output is an error message such as `Error: Due date year must be between 2000 and 2099.`
+
+---
+
+# Test case 43
+Leap year valid date (Feb 29 on a leap year): This test case verifies that February 29 is accepted on a leap year.
+Test Steps:
+- `tasker add "Leap day task" --due 2024-02-29`
+- Verify that the output is `Task added: #1 "Leap day task" due 2024-02-29 priority medium.`
+
+---
+
+# Test case 44
+Leap year invalid date (Feb 29 on a non-leap year): This test case verifies that February 29 on a non-leap year is rejected.
+Test Steps:
+- `tasker add "Fake leap" --due 2026-02-29`
+- Verify that the output is an error message such as `Error: Invalid calendar date: 2026-02-29.`
+
+---
+
+# Test case 45
+Add task with invalid priority value: This test case verifies that an unrecognized priority value is rejected.
+Test Steps:
+- `tasker add "Task A" --due 2026-07-01 --priority urgent`
+- Verify that the output is an error message such as `Error: Invalid priority "urgent". Accepted values: low, medium, high.`
+
+---
+
+# Test case 46
+Priority value is case-sensitive (uppercase rejected): This test case verifies that `High` (capitalized) is not accepted as a valid priority.
+Test Steps:
+- `tasker add "Task A" --due 2026-07-01 --priority High`
+- Verify that the output is an error message such as `Error: Invalid priority "High". Accepted values: low, medium, high.`
+
+---
+
+# Test case 47
+List with invalid status filter: This test case verifies that an unrecognized `--status` value produces an error.
+Test Steps:
+- `tasker add "Task A" --due 2026-07-01`
+- `tasker list --status pending`
+- Verify that the output is an error message such as `Error: Invalid status "pending". Accepted values: todo, done, all.`
+
+---
+
+# Test case 48
+Status filter is case-sensitive (uppercase rejected): This test case verifies that `Todo` (capitalized) is not accepted as a valid status.
+Test Steps:
+- `tasker add "Task A" --due 2026-07-01`
+- `tasker list --status Todo`
+- Verify that the output is an error message such as `Error: Invalid status "Todo". Accepted values: todo, done, all.`
+
+---
+
+# Test case 49
+List with invalid sort key: This test case verifies that an unrecognized `--sort` value produces an error.
+Test Steps:
+- `tasker add "Task A" --due 2026-07-01`
+- `tasker list --sort name`
+- Verify that the output is an error message such as `Error: Invalid sort key "name". Accepted values: created, due, priority.`
+
+---
+
+# Test case 50
+Sort key is case-sensitive (uppercase rejected): This test case verifies that `Due` (capitalized) is not a valid sort key.
+Test Steps:
+- `tasker add "Task A" --due 2026-07-01`
+- `tasker list --sort Due`
+- Verify that the output is an error message such as `Error: Invalid sort key "Due". Accepted values: created, due, priority.`
+
+---
+
+# Test case 51
+Unknown command is rejected: This test case verifies that an unrecognized command produces an error.
+Test Steps:
+- `tasker archive 1`
+- Verify that the output is an error message such as `Error: Unknown command "archive".`
+
+---
+
+# Test case 52
+Add task missing required --due option: This test case verifies that omitting `--due` when adding a task produces an error.
+Test Steps:
+- `tasker add "Task A"`
+- Verify that the output is an error message such as `Error: Missing required option --due.`
+
+---
+
+# Test case 53
+Add task missing title argument: This test case verifies that omitting the title produces an error.
+Test Steps:
+- `tasker add --due 2026-07-01`
+- Verify that the output is an error message such as `Error: Missing required argument: title.`
+
+---
+
+# Test case 54
+ID must be a positive integer (zero is invalid): This test case verifies that ID `0` is rejected.
+Test Steps:
+- `tasker complete 0`
+- Verify that the output is an error message such as `Error: Invalid ID "0". ID must be a positive integer.`
+
+---
+
+# Test case 55
+ID must be a positive integer (negative is invalid): This test case verifies that a negative ID is rejected.
+Test Steps:
+- `tasker delete -1`
+- Verify that the output is an error message such as `Error: Invalid ID "-1". ID must be a positive integer.`
+
+---
+
+# Test case 56
+Active task limit of 100 is enforced: This test case verifies that adding a 101st active task is rejected.
+Test Steps:
+- Add 100 tasks: `tasker add "Task 1" --due 2026-07-01` through `tasker add "Task 100" --due 2026-07-01`
+- `tasker add "Task 101" --due 2026-07-01`
+- Verify that the output is an error message such as `Error: Active task limit of 100 has been reached.`
+
+---
+
+# Test case 57
+Active task slot freed after delete allows adding new task: This test case verifies that deleting a task when at the 100-task limit allows a new task to be added.
+Test Steps:
+- Add 100 tasks: `tasker add "Task 1" --due 2026-07-01` through `tasker add "Task 100" --due 2026-07-01`
+- `tasker delete 1`
+- `tasker add "Task 101" --due 2026-07-01`
+- Verify that the output is `Task added: #101 "Task 101" due 2026-07-01 priority medium.`
+
+---
+
+# Test case 58
+Title with allowed special characters: This test case verifies that a title containing hyphens, underscores, commas, periods, colons, and parentheses is accepted.
+Test Steps:
+- `tasker add "Report: Q1-2026 (draft), v1.0_final" --due 2026-07-01`
+- Verify that the output is `Task added: #1 "Report: Q1-2026 (draft), v1.0_final" due 2026-07-01 priority medium.`
+
+---
+
+# Test case 59
+List with --status all shows both todo and done tasks: This test case verifies that `--status all` is the explicit form of the default and shows all tasks.
+Test Steps:
+- `tasker add "Task A" --due 2026-07-01`
+- `tasker add "Task B" --due 2026-07-02`
+- `tasker complete 1`
+- `tasker list --status all`
+- Verify that the output is:
+```
+1. #1 [done] Task A | due: 2026-07-01 | priority: medium
+2. #2 [todo] Task B | due: 2026-07-02 | priority: medium
+Total: 2 task(s)
+```
+
+---
+
+# Test case 60
+Full workflow: add, update, complete, reopen, list, summary: This test case verifies that a complete task lifecycle produces consistent state across list and summary.
+Test Steps:
+- `tasker add "Design doc" --due 2026-07-10 --priority low`
+- `tasker add "Code review" --due 2026-07-05 --priority high`
+- `tasker update 1 --priority medium`
+- `tasker complete 2`
+- `tasker reopen 2`
+- `tasker list --sort priority`
+- Verify that the output is:
+```
+1. #2 [todo] Code review | due: 2026-07-05 | priority: high
+2. #1 [todo] Design doc | due: 2026-07-10 | priority: medium
+Total: 2 task(s)
+````

@@ -1,0 +1,505 @@
+# Test case 1
+
+Add valid income: This test case verifies that the program can correctly add income with valid input.
+Test Steps:
+
+- `planner add-income 5000 "salary"`
+- Verify that the output is `Income added: $5000 from source "salary".`.
+
+# Test case 2
+
+Add valid expense: This test case verifies that the program can correctly add expense with valid input.
+Test Steps:
+
+- `planner add-expense 1000 "food"`
+- Verify that the output is `Expense added: $1000 for source "food".`.
+
+# Test case 3
+
+Add income with negative amount: This test case verifies that the program outputs error when the income amount is negative.
+Test Steps:
+
+- `planner add-income -5000 "salary"`
+- Verify that the output is `Error: Amount should be a positive integer.`.
+
+# Test case 4
+
+Add expense with negative amount: This test case verifies that the program outputs error when the expense amount is negative.
+Test Steps:
+
+- `planner add-expense -1000 "food"`
+- Verify that the output is `Error: Amount should be a positive integer.`.
+
+# Test case 5
+
+Add income with source name more than 50 characters: This test case verifies that the program outputs error when the source name is more than 50 characters.
+Test Steps:
+
+- `planner add-income 5000 "salaryfromaverylargesourcewithmorethanfiftycharacters"`
+- Verify that the output is `Error: Source name should not exceed 50 characters.`.
+
+# Test case 6
+
+Add expense with source name more than 50 characters: This test case verifies that the program outputs error when the source name is more than 50 characters.
+Test Steps:
+
+- `planner add-expense 1000 "foodfromaverylargesourcewithmorethanfiftycharacters"`
+- Verify that the output is `Error: Source name should not exceed 50 characters.`.
+
+# Test case 7
+
+Add income with source name already exists: This test case verifies that the program outputs error when the source name already exists.
+Test Steps:
+
+- `planner add-income 5000 "salary"`
+- `planner add-income 1000 "salary"`
+- Verify that the output is `Error: Source name "salary" already exists.`.
+
+# Test case 8
+
+Add expense with source name already exists: This test case verifies that the program outputs error when the source name already exists.
+Test Steps:
+
+- `planner add-expense 1000 "food"`
+- `planner add-expense 500 "food"`
+- Verify that the output is `Error: Source name "food" already exists.`.
+
+# Test case 9
+
+Remove income with valid source name: This test case verifies that the program can correctly remove income with valid source name.
+Test Steps:
+
+- `planner add-income 5000 "salary"`
+- `planner remove-income "salary"`
+- Verify that the output is `Income removed: "salary".`.
+
+# Test case 10
+
+Remove expense with valid source name: This test case verifies that the program can correctly remove expense with valid source name.
+Test Steps:
+
+- `planner add-expense 1000 "food"`
+- `planner remove-expense "food"`
+- Verify that the output is `Expense removed: "food".`.
+
+# Test case 11
+
+Remove income with non-existing source name: This test case verifies that the program outputs error when trying to remove income with non-existing source name.
+Test Steps:
+
+- `planner remove-income "salary"`
+- Verify that the output is `Error: Source name "salary" does not exist.`.
+
+# Test case 12
+
+Remove expense with non-existing source name: This test case verifies that the program outputs error when trying to remove expense with non-existing source name.
+Test Steps:
+
+- `planner remove-expense "food"`
+- Verify that the output is `Error: Source name "food" does not exist.`.
+
+# Test case 13
+
+List incomes with no income sources: This test case verifies that the program correctly displays no income sources when there are no income sources.
+Test Steps:
+
+- `planner list-incomes`
+- Verify that the output is `No income sources.`.
+
+# Test case 14
+
+List expenses with no expense sources: This test case verifies that the program correctly displays no expense sources when there are no expense sources.
+Test Steps:
+
+- `planner list-expenses`
+- Verify that the output is `No expense sources.`.
+
+# Test case 15
+
+List incomes with one income source: This test case verifies that the program correctly lists one income source.
+Test Steps:
+
+- `planner add-income 5000 "salary"`
+- `planner list-incomes`
+- Verify that the output is
+
+```
+
+1. salary: $5000
+   Total Income: $5000
+
+```
+
+# Test case 16
+
+List expenses with one expense source: This test case verifies that the program correctly lists one expense source.
+Test Steps:
+
+- `planner add-expense 1000 "food"`
+- `planner list-expenses`
+- Verify that the output is
+
+```
+
+1. food: $1000
+   Total Expense: $1000
+
+```
+
+# Test case 17
+
+List incomes with multiple income sources: This test case verifies that the program correctly lists multiple income sources.
+Test Steps:
+
+- `planner add-income 5000 "salary"`
+- `planner add-income 1000 "bonus"`
+- `planner list-incomes`
+- Verify that the output is
+
+```
+
+1. salary: $5000
+2. bonus: $1000
+   Total Income: $6000
+
+```
+
+# Test case 18
+
+List expenses with multiple expense sources: This test case verifies that the program correctly lists multiple expense sources.
+Test Steps:
+
+- `planner add-expense 1000 "food"`
+- `planner add-expense 500 "drinks"`
+- `planner list-expenses`
+- Verify that the output is
+
+```
+
+1. food: $1000
+2. drinks: $500
+   Total Expense: $1500
+
+```
+
+# Test case 19
+
+Show budget with no income and expense sources: This test case verifies that the program correctly displays the budget with no income and expense sources.
+Test Steps:
+
+- `planner show-budget`
+- Verify that the output is
+
+```
+
+Total Income: $0
+Total Expense: $0
+Balance: $0
+
+```
+
+# Test case 20
+
+Show budget with income sources and no expense sources: This test case verifies that the program correctly displays the budget with income sources and no expense sources.
+Test Steps:
+
+- `planner add-income 5000 "salary"`
+- `planner show-budget`
+- Verify that the output is
+
+```
+
+Total Income: $5000
+Total Expense: $0
+Balance: $5000
+
+```
+
+# Test case 21
+
+Show budget with no income sources and expense sources: This test case verifies that the program correctly displays the budget with no income sources and expense sources.
+Test Steps:
+
+- `planner add-expense 1000 "food"`
+- `planner show-budget`
+- Verify that the output is
+
+```
+
+Total Income: $0
+Total Expense: $1000
+Balance: $-1000
+
+```
+
+# Test case 22
+
+Show budget with income and expense sources: This test case verifies that the program correctly displays the budget with income and expense sources.
+Test Steps:
+
+- `planner add-income 5000 "salary"`
+- `planner add-expense 1000 "food"`
+- `planner show-budget`
+- Verify that the output is
+
+```
+
+Total Income: $5000
+Total Expense: $1000
+Balance: $4000
+
+```
+
+# Test case 23
+
+Add income with non-integer amount: This test case verifies that the program outputs error when the income amount is not an integer.
+Test Steps:
+
+- `planner add-income 5000.50 "salary"`
+- Verify that the output is `Error: Amount should be a positive integer.`.
+
+# Test case 24
+
+Add expense with non-integer amount: This test case verifies that the program outputs error when the expense amount is not an integer.
+Test Steps:
+
+- `planner add-expense 1000.50 "food"`
+- Verify that the output is `Error: Amount should be a positive integer.`.
+
+# Test case 25
+
+Add income with amount more than 100,000: This test case verifies that the program outputs error when the income amount is more than 100,000.
+Test Steps:
+
+- `planner add-income 150000 "salary"`
+- Verify that the output is `Error: Amount should not exceed 100,000.`.
+
+# Test case 26
+
+Add expense with amount more than 100,000: This test case verifies that the program outputs error when the expense amount is more than 100,000.
+Test Steps:
+
+- `planner add-expense 150000 "food"`
+- Verify that the output is `Error: Amount should not exceed 100,000.`.
+
+# Test case 27
+
+Add income with more than 100 sources: This test case verifies that the program outputs error when trying to add more than 100 income sources.
+Test Steps:
+
+- Repeat 101 times: `planner add-income 5000 "salary{i}"`
+- Verify that the output is `Error: You cannot have more than 100 income sources.`.
+
+# Test case 28
+
+Add expense with more than 100 sources: This test case verifies that the program outputs error when trying to add more than 100 expense sources.
+Test Steps:
+
+- Repeat 101 times: `planner add-expense 1000 "food{i}"`
+- Verify that the output is `Error: You cannot have more than 100 expense sources.`.
+
+# Test case 29
+
+Add income with no source name: This test case verifies that the program outputs error when the source name is not provided for income.
+Test Steps:
+
+- `planner add-income 5000`
+- Verify that the output is `Error: Source name is required.`.
+
+# Test case 30
+
+Add expense with no source name: This test case verifies that the program outputs error when the source name is not provided for expense.
+Test Steps:
+
+- `planner add-expense 1000`
+- Verify that the output is `Error: Source name is required.`.
+
+# Test case 31
+
+Remove income with no source name: This test case verifies that the program outputs error when the source name is not provided for removing income.
+Test Steps:
+
+- `planner remove-income`
+- Verify that the output is `Error: Source name is required.`.
+
+# Test case 32
+
+Remove expense with no source name: This test case verifies that the program outputs error when the source name is not provided for removing expense.
+Test Steps:
+
+- `planner remove-expense`
+- Verify that the output is `Error: Source name is required.`.
+
+# Test case 33
+
+List incomes after removing income source: This test case verifies that the program correctly lists incomes after removing an income source.
+Test Steps:
+
+- `planner add-income 5000 "salary"`
+- `planner remove-income "salary"`
+- `planner list-incomes`
+- Verify that the output is `No income sources.`.
+
+# Test case 34
+
+List expenses after removing expense source: This test case verifies that the program correctly lists expenses after removing an expense source.
+Test Steps:
+
+- `planner add-expense 1000 "food"`
+- `planner remove-expense "food"`
+- `planner list-expenses`
+- Verify that the output is `No expense sources.`.
+
+# Test case 35
+
+Show budget after removing income source: This test case verifies that the program correctly displays the budget after removing an income source.
+Test Steps:
+
+- `planner add-income 5000 "salary"`
+- `planner remove-income "salary"`
+- `planner show-budget`
+- Verify that the output is
+
+```
+
+Total Income: $0
+Total Expense: $0
+Balance: $0
+
+```
+
+# Test case 36
+
+Show budget after removing expense source: This test case verifies that the program correctly displays the budget after removing an expense source.
+Test Steps:
+
+- `planner add-expense 1000 "food"`
+- `planner remove-expense "food"`
+- `planner show-budget`
+- Verify that the output is
+
+```
+
+Total Income: $0
+Total Expense: $0
+Balance: $0
+
+```
+
+# Test case 37
+
+Add income with same source name as existing expense: This test case verifies that the program correctly adds income with the same source name as an existing expense.
+Test Steps:
+
+- `planner add-expense 1000 "food"`
+- `planner add-income 5000 "food"`
+- Verify that the output is `Income added: $5000 from source "food".`.
+
+# Test case 38
+
+Add expense with same source name as existing income: This test case verifies that the program correctly adds expense with the same source name as an existing income.
+Test Steps:
+
+- `planner add-income 5000 "salary"`
+- `planner add-expense 1000 "salary"`
+- Verify that the output is `Expense added: $1000 for source "salary".`.
+
+# Test case 39
+
+Remove income with same source name as existing expense: This test case verifies that the program outputs error when trying to remove income with the same source name as an existing expense.
+Test Steps:
+
+- `planner add-expense 1000 "food"`
+- `planner remove-income "food"`
+- Verify that the output is `Error: Source name "food" does not exist.`.
+
+# Test case 40
+
+Remove expense with same source name as existing income: This test case verifies that the program outputs error when trying to remove expense with the same source name as an existing income.
+Test Steps:
+
+- `planner add-income 5000 "salary"`
+- `planner remove-expense "salary"`
+- Verify that the output is `Error: Source name "salary" does not exist.`.
+
+# Test case 41
+
+Add income with empty source name: This test case verifies that the program outputs error when the source name for income is empty.
+Test Steps:
+
+- `planner add-income 5000 ""`
+- Verify that the output is `Error: Source name cannot be empty.`.
+
+# Test case 42
+
+Add expense with empty source name: This test case verifies that the program outputs error when the source name for expense is empty.
+Test Steps:
+
+- `planner add-expense 1000 ""`
+- Verify that the output is `Error: Source name cannot be empty.`.
+
+# Test case 43
+
+Remove income with empty source name: This test case verifies that the program outputs error when the source name for removing income is empty.
+Test Steps:
+
+- `planner remove-income ""`
+- Verify that the output is `Error: Source name cannot be empty.`.
+
+# Test case 44
+
+Remove expense with empty source name: This test case verifies that the program outputs error when the source name for removing expense is empty.
+Test Steps:
+
+- `planner remove-expense ""`
+- Verify that the output is `Error: Source name cannot be empty.`.
+
+# Test case 45
+
+Add income with source name longer than 50 characters: This test case verifies that the program outputs error when the source name for income is longer than 50 characters.
+Test Steps:
+
+- `planner add-income 5000 "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg"`
+- Verify that the output is `Error: Source name should not exceed 50 characters.`.
+
+# Test case 46
+
+Add expense with source name longer than 50 characters: This test case verifies that the program outputs error when the source name for expense is longer than 50 characters.
+Test Steps:
+
+- `planner add-expense 1000 "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg"`
+- Verify that the output is `Error: Source name should not exceed 50 characters.`.
+
+# Test case 47
+
+Add income with negative amount: This test case verifies that the program outputs error when the income amount is negative.
+Test Steps:
+
+- `planner add-income -5000 "salary"`
+- Verify that the output is `Error: Amount should be a positive integer.`.
+
+# Test case 48
+
+Add expense with negative amount: This test case verifies that the program outputs error when the expense amount is negative.
+Test Steps:
+
+- `planner add-expense -1000 "food"`
+- Verify that the output is `Error: Amount should be a positive integer.`.
+
+# Test case 49
+
+Remove income with source name containing spaces: This test case verifies that the program correctly removes an income source with a name that contains spaces.
+Test Steps:
+
+- `planner add-income 5000 "part time job"`
+- `planner remove-income "part time job"`
+- Verify that the output is `Income removed: "part time job"`.
+
+# Test case 50
+
+Remove expense with source name containing spaces: This test case verifies that the program correctly removes an expense source with a name that contains spaces.
+Test Steps:
+
+- `planner add-expense 1000 "dining out"`
+- `planner remove-expense "dining out"`
+- Verify that the output is `Expense removed: "dining out"`.

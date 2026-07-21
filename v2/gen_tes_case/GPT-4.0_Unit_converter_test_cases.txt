@@ -1,0 +1,299 @@
+# Test case 1
+
+Test Case Length Conversion - Meter to Foot: This test case verifies the conversion from meters to feet
+Input: `unitconv --from meter --to foot --value 10`
+Expected result: `Result: 32.81 feet`
+
+# Test case 2
+
+Test Case Length Conversion - Mile to Yard: This test case verifies the conversion from miles to yards
+Input: `unitconv --from mile --to yard --value 1`
+Expected result: `Result: 1760.00 yards`
+
+# Test case 3
+
+Test Case Length Conversion - Yard to Meter: This test case verifies the conversion from yards to meters
+Input: `unitconv --from yard --to meter --value 1`
+Expected result: `Result: 0.91 meters`
+
+# Test case 4
+
+Test Case Length Conversion - Foot to Mile: This test case verifies the conversion from feet to miles
+Input: `unitconv --from foot --to mile --value 5280`
+Expected result: `Result: 1.00 miles`
+
+# Test case 5
+
+Test Case Temperature Conversion - Celsius to Fahrenheit: This test case verifies the conversion from Celsius to Fahrenheit
+Input: `unitconv --from celsius --to fahrenheit --value 100`
+Expected result: `Result: 212.00 Fahrenheit`
+
+# Test case 6
+
+Test Case Temperature Conversion - Fahrenheit to Celsius: This test case verifies the conversion from Fahrenheit to Celsius
+Input: `unitconv --from fahrenheit --to celsius --value 32`
+Expected result: `Result: 0.00 Celsius`
+
+# Test case 7
+
+Test Case Temperature Conversion - Kelvin to Celsius: This test case verifies the conversion from Kelvin to Celsius
+Input: `unitconv --from kelvin --to celsius --value 273`
+Expected result: `Result: 0.00 Celsius`
+
+# Test case 8
+
+Test Case Temperature Conversion - Celsius to Kelvin: This test case verifies the conversion from Celsius to Kelvin
+Input: `unitconv --from celsius --to kelvin --value 0`
+Expected result: `Result: 273.15 Kelvin`
+
+# Test case 9
+
+Test Case Temperature Conversion - Fahrenheit to Kelvin: This test case verifies the conversion from Fahrenheit to Kelvin
+Input: `unitconv --from fahrenheit --to kelvin --value 32`
+Expected result: `Result: 273.15 Kelvin`
+
+# Test case 10
+
+Test Case Temperature Conversion - Kelvin to Fahrenheit: This test case verifies the conversion from Kelvin to Fahrenheit
+Input: `unitconv --from kelvin --to fahrenheit --value 273.15`
+Expected result: `Result: 32.00 Fahrenheit`
+
+# Test case 11
+
+Test Case Invalid Conversion - Same Source and Target Units: This test case verifies that an error message is returned if the source and target units are the same
+Input: `unitconv --from meter --to meter --value 10`
+Expected result: `Error: source_units and target_units cannot be the same.`
+
+# Test case 12
+
+Test Case Invalid Conversion - Unsupported Unit: This test case verifies that an error message is returned if an unsupported unit is used
+Input: `unitconv --from meter --to inch --value 10`
+Expected result: `Error: Unsupported unit.`
+
+# Test case 13
+
+Test Case Invalid Conversion - Negative Length: This test case verifies that an error message is returned if the value to convert is negative and its category is length
+Input: `unitconv --from meter --to foot --value -10`
+Expected result: `Error: Length and Kelvin values must be positive.`
+
+# Test case 14
+
+Test Case Invalid Conversion - Non-numeric Value: This test case verifies that an error message is returned if the value to convert is not numeric
+Input: `unitconv --from meter --to foot --value ten`
+Expected result: `Error: value_to_convert must be a numeric value.`
+
+# Test case 15
+
+Test Case Invalid Conversion - Value Greater Than 1000: This test case verifies that an error message is returned if the value to convert is greater than 1000
+Input: `unitconv --from meter --to foot --value 1001`
+Expected result: `Error: value_to_convert must be less or equal to 1000.`
+
+# Test case 16
+
+Test Case Conversion with Decimal Value - Length: This test case verifies the conversion from meters to feet with a decimal value
+Input: `unitconv --from meter --to foot --value 1.5`
+Expected result: `Result: 4.92 feet`
+
+# Test case 17
+
+Test Case Conversion with Decimal Value - Temperature: This test case verifies the conversion from Celsius to Fahrenheit with a decimal value
+Input: `unitconv --from celsius --to fahrenheit --value 0.5`
+Expected result: `Result: 32.90 Fahrenheit`
+
+# Test case 18
+
+Test Case Length Conversion - Foot to Meter: This test case verifies the conversion from feet to meters
+Input: `unitconv --from foot --to meter --value 3.28`
+Expected result: `Result: 1.00 meters`
+
+# Test case 19
+
+Test Case Length Conversion - Yard to Mile: This test case verifies the conversion from yards to miles
+Input: `unitconv --from yard --to mile --value 1760`
+Expected result: `Result: 1.00 miles`
+
+# Test case 20
+
+Test Case Length Conversion - Mile to Meter: This test case verifies the conversion from miles to meters
+Input: `unitconv --from mile --to meter --value 1`
+Expected result: `Result: 1609.34 meters`
+
+# Test case 21
+
+Test Case Invalid Conversion - Different Categories: This test case verifies that an error message is returned if the source unit and target unit belong to different categories
+Input: `unitconv --from meter --to fahrenheit --value 10`
+Expected result: `Error: source_units and target_units must belong to the same category.`
+
+# Test case 22
+
+Test Case Invalid Conversion - No Value Provided: This test case verifies that an error message is returned if no value is provided for conversion
+Input: `unitconv --from meter --to foot`
+Expected result: `Error: No value provided for conversion.`
+
+# Test case 23
+
+Test Case Invalid Conversion - No Target Unit Provided: This test case verifies that an error message is returned if no target unit is provided
+Input: `unitconv --from meter --value 10`
+Expected result: `Error: No target unit provided.`
+
+# Test case 24
+
+Test Case Invalid Conversion - No Source Unit Provided: This test case verifies that an error message is returned if no source unit is provided
+Input: `unitconv --to foot --value 10`
+Expected result: `Error: No source unit provided.`
+
+# Test case 25
+
+Test Case Conversion - Negative Temperature: This test case verifies the conversion from Celsius to Fahrenheit with a negative temperature
+Input: `unitconv --from celsius --to fahrenheit --value -5`
+Expected result: `Result: 23.00 Fahrenheit`
+
+# Test case 26
+
+Test Case Conversion - Negative Kelvin: This test case verifies that an error message is returned if the value to convert is negative and its source unit is Kelvin
+Input: `unitconv --from kelvin --to celsius --value -5`
+Expected result: `Error: Length and Kelvin values must be positive.`
+
+# Test case 27
+
+Test Case Conversion - Kelvin to Fahrenheit: This test case verifies the conversion from Kelvin to Fahrenheit
+Input: `unitconv --from kelvin --to fahrenheit --value 0`
+Expected result: `Result: -459.67 Fahrenheit`
+
+# Test case 28
+
+Test Case Conversion - Fahrenheit to Kelvin: This test case verifies the conversion from Fahrenheit to Kelvin
+Input: `unitconv --from fahrenheit --to kelvin --value 0`
+Expected result: `Result: 255.37 Kelvin`
+
+# Test case 29
+
+Test Case Conversion - Fahrenheit to Celsius: This test case verifies the conversion from Fahrenheit to Celsius
+Input: `unitconv --from fahrenheit --to celsius --value 0`
+Expected result: `Result: -17.78 Celsius`
+
+# Test case 30
+
+Test Case Conversion - Celsius to Kelvin: This test case verifies the conversion from Celsius to Kelvin
+Input: `unitconv --from celsius --to kelvin --value 0`
+Expected result: `Result: 273.15 Kelvin`
+
+# Test case 31
+
+Test Case Conversion - Celsius to Fahrenheit: This test case verifies the conversion from Celsius to Fahrenheit
+Input: `unitconv --from celsius --to fahrenheit --value 0`
+Expected result: `Result: 32.00 Fahrenheit`
+
+# Test case 32
+
+Test Case Conversion - Fahrenheit to Celsius: This test case verifies the conversion from Fahrenheit to Celsius
+Input: `unitconv --from fahrenheit --to celsius --value 212`
+Expected result: `Result: 100.00 Celsius`
+
+# Test case 33
+
+Test Case Conversion - Celsius to Fahrenheit: This test case verifies the conversion from Celsius to Fahrenheit
+Input: `unitconv --from celsius --to fahrenheit --value 100`
+Expected result: `Result: 212.00 Fahrenheit`
+
+# Test case 34
+
+Test Case Conversion - Kelvin to Celsius: This test case verifies the conversion from Kelvin to Celsius
+Input: `unitconv --from kelvin --to celsius --value 0`
+Expected result: `Result: -273.15 Celsius`
+
+# Test case 35
+
+Test Case Conversion - Celsius to Kelvin: This test case verifies the conversion from Celsius to Kelvin
+Input: `unitconv --from celsius --to kelvin --value -273.15`
+Expected result: `Result: 0.00 Kelvin`
+
+# Test case 36
+
+Test Case Conversion - Kelvin to Fahrenheit: This test case verifies the conversion from Kelvin to Fahrenheit
+Input: `unitconv --from kelvin --to fahrenheit --value 0`
+Expected result: `Result: -459.67 Fahrenheit`
+
+# Test case 37
+
+Test Case Conversion - Fahrenheit to Kelvin: This test case verifies the conversion from Fahrenheit to Kelvin
+Input: `unitconv --from fahrenheit --to kelvin --value -459.67`
+Expected result: `Result: 0.00 Kelvin`
+
+# Test case 38
+
+Test Case Conversion - Mile to Foot: This test case verifies the conversion from miles to feet
+Input: `unitconv --from mile --to foot --value 1`
+Expected result: `Result: 5280.00 feet`
+
+# Test case 39
+
+Test Case Conversion - Yard to Meter: This test case verifies the conversion from yards to meters
+Input: `unitconv --from yard --to meter --value 1`
+Expected result: `Result: 0.91 meters`
+
+# Test case 40
+
+Test Case Conversion - Foot to Mile: This test case verifies the conversion from feet to miles
+Input: `unitconv --from foot --to mile --value 5280`
+Expected result: `Result: 1.00 miles`
+
+# Test case 41
+
+Test Case Conversion - Mile to Yard: This test case verifies the conversion from miles to yards
+Input: `unitconv --from mile --to yard --value 1`
+Expected result: `Result: 1760.00 yards`
+
+# Test case 42
+
+Test Case Conversion - Yard to Foot: This test case verifies the conversion from yards to feet
+Input: `unitconv --from yard --to foot --value 1`
+Expected result: `Result: 3.00 feet`
+
+# Test case 43
+
+Test Case Conversion - Foot to Yard: This test case verifies the conversion from feet to yards
+Input: `unitconv --from foot --to yard --value 3`
+Expected result: `Result: 1.00 yards`
+
+# Test case 44
+
+Test Case Conversion - Mile to Meter: This test case verifies the conversion from miles to meters
+Input: `unitconv --from mile --to meter --value 1`
+Expected result: `Result: 1609.34 meters`
+
+# Test case 45
+
+Test Case Conversion - Meter to Mile: This test case verifies the conversion from meters to miles
+Input: `unitconv --from meter --to mile --value 1609.34`
+Expected result: `Result: 1.00 miles`
+
+# Test case 46
+
+Test Case Conversion - Foot to Meter: This test case verifies the conversion from feet to meters
+Input: `unitconv --from foot --to meter --value 3.28`
+Expected result: `Result: 1.00 meters`
+
+# Test case 47
+
+Test Case Conversion - Meter to Foot: This test case verifies the conversion from meters to feet
+Input: `unitconv --from meter --to foot --value 1`
+Expected result: `Result: 3.28 feet`
+
+# Test case 48
+
+Test Case Conversion - Yard to Mile: This test case verifies the conversion from yards to miles
+Input: `unitconv --from yard --to mile --value 1760`
+Expected result: `Result: 1.00 miles`
+
+# Test case 49
+
+Test Case Conversion - Mile to Yard: This test case verifies the conversion from miles to yards
+Input: `unitconv --from mile --to yard --value 1`
+Expected result: `Result: 1760.00 yards`
+
+# Test case 50
+
+Test Case Conversion - Meter to Yard: This test case verifies the conversion from meters to yards
+Input: `unitconv --from meter --to yard --value 0.91`
+Expected result: `Result: 1.00 yards`

@@ -1,0 +1,102 @@
+Test case 1
+finecalc --type book --days-late 10 --member no --lost no
+
+Verify that the output is Total fine: $5.00
+
+
+
+Test case 2
+finecalc --type dvd --days-late 10 --member no --lost no
+
+Verify that the output is Total fine: $10.00
+
+
+
+Test case 3
+finecalc --type book --days-late 0 --member no --lost no
+
+Verify that the output is Total fine: $0.00
+
+
+
+Test case 4
+finecalc --type book --days-late 366 --member no --lost no
+
+Verify that the output is Error: Days-late above 365.
+
+
+
+Test case 5
+finecalc --type book --days-late -1 --member no --lost no
+
+Verify that the output is Error: Days-late below 0.
+
+
+
+Test case 6
+finecalc --type book --days-late muoi --member no --lost no
+
+Verify that the output is Error: Non-numeric days-late value.
+
+
+
+Test case 7
+finecalc --type book --days-late 50 --member no --lost no
+
+Verify that the output is Total fine: $20.00
+
+
+
+Test case 8
+finecalc --type dvd --days-late 50 --member no --lost no
+
+Verify that the output is Total fine: $30.00
+
+
+
+Test case 9
+finecalc --type book --days-late 10 --member yes --lost no
+
+Verify that the output is Total fine: $2.50
+
+
+
+Test case 10
+finecalc --type book --days-late 0 --member no --lost yes
+
+Verify that the output is Total fine: $25.00
+
+
+
+Test case 11
+finecalc --type book --days-late 10 --member yes --lost yes
+
+Verify that the output is Total fine: $27.50
+
+
+
+Test case 12
+finecalc --type Book --days-late 10 --member no --lost no
+
+Verify that the output is Error: Invalid item type.
+
+
+
+Test case 13
+finecalc --days-late 10 --member no --lost no
+
+Verify that the output is Error: Missing required option.
+
+
+
+Test case 14
+finecalc --type book --days-late 10 --member no --lost no --extra option
+
+Verify that the output is Error: Unknown option.
+
+
+
+Test case 15
+finecalc --type book --type dvd --days-late 10 --member no --lost no
+
+Verify that the output is Error: Duplicate option.

@@ -1,0 +1,82 @@
+======================================================================
+SANITY CHECK - reproduce note example (n=10, expect p=0.0117)
+
+[note sanity check]
+  pairs: n=10 usable  (+9 AI>Human, -1 Human>AI, =0 tie)
+  mean diff (AI-Human) = +0.022   median diff = +0.030
+  W+ = 51.0   W- = 4.0   W = 4.0
+  EXACT two-sided p = 0.01367  ( = 7/512 )
+  normal-approx p   = 0.01906   (z=2.344)
+  -> SIGNIFICANT (reject H0)
+
+======================================================================
+TEST 1 - per application (n=5): mean AI vs mean Human coverage
+  unit                                         AI%    Hum%    diff
+  Password strength checker                  75.7   56.2   +19.4
+  Unit converter                             83.6   62.1   +21.6
+  Budget planner                             78.1   64.4   +13.7
+  Library fine calculator                    95.8   66.7   +29.2
+  Task manager                               86.2   56.3   +29.9
+
+[Test 1: all 5 apps]
+  pairs: n=5 usable  (+5 AI>Human, -0 Human>AI, =0 tie)
+  mean diff (AI-Human) = +0.228   median diff = +0.216
+  W+ = 15.0   W- = 0.0   W = 0.0
+  EXACT two-sided p = 0.06250  ( = 1/16 )
+  normal-approx p   = 0.05906   (z=1.888)
+  -> not significant at 0.05
+
+======================================================================
+TEST 2 - per category, REPRODUCED apps (consistent Kirinuki baseline)
+  unit                                         AI%    Hum%    diff
+  Password str::Basic Viewpoint: Very        91.7   83.3    +8.3
+  Password str::Basic Viewpoint: Weak       100.0   91.7    +8.3
+  Password str::Basic Viewpoint: Mediu       83.3   66.7   +16.7
+  Password str::Basic Viewpoint: Stron       83.3   75.0    +8.3
+  Password str::Basic Viewpoint: Very       100.0  100.0    +0.0
+  Password str::Boundary Value               50.0   75.0   -25.0
+  Password str::Minimum & Maximum            75.0   50.0   +25.0
+  Password str::Character Type Combina      100.0   75.0   +25.0
+  Password str::Inappropriate Strings        58.3   58.3    +0.0
+  Password str::Others                       60.0   15.0   +45.0
+  Unit convert::Basic Viewpoint             100.0  100.0    +0.0
+  Unit convert::Combination                 100.0   81.2   +18.8
+  Unit convert::Unit Error                  100.0   75.0   +25.0
+  Unit convert::Value Variation (Commo      100.0  100.0    +0.0
+  Unit convert::Value Error (Common)         91.7   91.7    +0.0
+  Unit convert::Length Error                 87.5   75.0   +12.5
+  Unit convert::Temperature Variation        87.5   12.5   +75.0
+  Unit convert::Temperature Error            75.0   50.0   +25.0
+  Unit convert::Argument Format Error        62.5   43.8   +18.8
+  Unit convert::Maximum/Minimum              56.2   18.8   +37.5
+  Budget plann::Basic Viewpoint: add-i      100.0  100.0    +0.0
+  Budget plann::Basic Viewpoint: add-e      100.0  100.0    +0.0
+  Budget plann::Basic Viewpoint: remov      100.0  100.0    +0.0
+  Budget plann::Basic Viewpoint: remov      100.0  100.0    +0.0
+  Budget plann::Basic Viewpoint: list-      100.0  100.0    +0.0
+  Budget plann::Basic Viewpoint: list-      100.0  100.0    +0.0
+  Budget plann::Basic Viewpoint: show-       75.0   75.0    +0.0
+  Budget plann::Amount Input                 71.9   78.1    -6.2
+  Budget plann::Source Input                 62.5   40.6   +21.9
+  Budget plann::Internal State               78.1   68.8    +9.4
+  Budget plann::Maximum Value                66.7   58.3    +8.3
+  Budget plann::Budget Calculation           91.7   37.5   +54.2
+
+[Test 2: reproduced categories]
+  pairs: n=20 usable  (+18 AI>Human, -2 Human>AI, =12 tie)
+  mean diff (AI-Human) = +0.129   median diff = +0.083
+  W+ = 194.5   W- = 15.5   W = 15.5
+  EXACT two-sided p = 0.00027  ( = 71/262144 )
+  normal-approx p   = 0.00089   (z=3.323)
+  -> SIGNIFICANT (reject H0)
+
+======================================================================
+TEST 3 - per category, ALL 5 apps pooled
+
+[Test 3: all categories pooled]
+  pairs: n=24 usable  (+22 AI>Human, -2 Human>AI, =12 tie)
+  mean diff (AI-Human) = +0.147   median diff = +0.094
+  W+ = 284.0   W- = 16.0   W = 16.0
+  EXACT two-sided p = 0.00002  ( = 81/4194304 )
+  normal-approx p   = 0.00014   (z=3.814)
+  -> SIGNIFICANT (reject H0)

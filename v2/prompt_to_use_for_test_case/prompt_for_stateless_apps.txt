@@ -1,0 +1,18 @@
+Create at least 50 test cases necessary and sufficient to ensure the correct behavior of a command line application "{name}" with the following specifications.
+For invalid input, an appropriate and descriptive error message you create should be output.
+
+Your output should be as follows (surround by code block):
+
+### Output Format
+
+```markdown
+# Test case {id}
+
+{Test case name}: This test case verify {description}
+Input: `<name> {input}`
+Expected result: `{result}`
+```
+
+### Specification
+
+{specification}

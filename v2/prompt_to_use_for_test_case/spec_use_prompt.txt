@@ -1,0 +1,6 @@
+Task_manager_cli_spec.txt  _ stateful
+Budget_planner_spec.txt _ stateful
+
+Library_fine_calculator_cli_spec.txt _ stateless
+Password_strength_checker_spec.txt _ stateless
+Unit_converter_spec.txt _ stateless

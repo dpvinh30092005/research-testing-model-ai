@@ -1,0 +1,41 @@
+===== [Heading1] RESEARCH PROPOSAL =====
+===== [Heading2] Abstract =====
+===== [Heading2] 1. Introduction =====
+===== [Heading3] 1.1 Background =====
+===== [Heading3] Problem statement =====
+===== [Heading3] Research Aim =====
+===== [Heading3] Research Objective =====
+===== [Heading2] 2. Literature Review =====
+===== [Heading4] Overview of Existing Research =====
+===== [Heading4] Research Gaps =====
+===== [Heading2] 3. Research Scope =====
+===== [Heading3] Research Question =====
+===== [Heading3] Scope of the study =====
+===== [Heading2] 4. Approach and Method =====
+===== [Heading3] 4.1 Research Approach =====
+===== [Heading3] 4.2 Data Preparation =====
+===== [Heading3] Dataset Sources =====
+===== [Heading3] Search Strategy =====
+===== [Heading3] Inclusion Criteria =====
+===== [Heading3] Exclusion Criteria =====
+===== [Heading3] Data Extraction =====
+===== [Heading3] Proposed Framework / System Design =====
+===== [Heading3] Evaluation Method =====
+===== [Heading3] Ethical Considerations =====
+===== [Heading2] 5. Research Plan =====
+===== [Heading2] 6. Expected Outcomes =====
+Expected Findings:
+The Synergy Delta: We expect to demonstrate that GenAI-generated suites provide superior horizontal functional coverage, while human-authored suites provide superior depth in boundary logic, confirming that their combination yields a fault detection rate higher than any single source[cite: 18, 5].
+Optimization Efficiency: The study is expected to prove that a multi-stage prompt-chaining pipeline can reduce test suite redundancy by at least 13-20% compared to standard single-shot prompting[cite: 5, 15].
+Expected System/Model Performance:
+Reduction in Script Flakiness: By providing the model with pruned HTML DOM context alongside functional requirements, we anticipate a measurable increase in the successful execution rate (Pass@1) of automated black-box scripts[cite: 2, 12].
+High Functional Validity: We aim to achieve a functional validity rate exceeding 85% for all generated scenarios, identifying complex kịch bản that senior human testers often overlook due to time constraints[cite: 5, 13].
+Anticipated Contributions:
+Comparative Roadmap: A detailed performance matrix that maps the specific strengths and weaknesses of GenAI vs. Humans in Black-Box system testing.
+Integrated Framework: A validated methodology for integrating functional requirements with UI structural data to produce executable and reliable automated test suites[cite: 2, 19].
+Practitioner-Informed Guidelines: A set of best practices for QA teams to safely adopt GenAI, focusing on prompt engineering patterns that minimize hallucinations in critical system logic.
+===== [Heading2] 7. Limitations and Risk =====
+===== [Heading3] 7.1 Limitations =====
+===== [Heading3] 7.2 Risk and Mitigation Strategies =====
+===== [Heading1] 8. Specification Collection from Zenodo =====
+===== [Heading2] References =====
